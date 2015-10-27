@@ -1,0 +1,14 @@
+echo
+memory heap 1 mb stack 36 mb global 12 mb
+start a3n
+
+prepare
+ system a3n_em
+ new_top new_seq
+ histidine HID
+ chain A
+ maxscf 1
+end
+
+task prepare
+

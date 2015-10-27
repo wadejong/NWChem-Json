@@ -1,0 +1,26 @@
+# If this was a restart directive with only the python data and task, 
+# an old database could be edited.  
+#
+# As an example, here, we populate a new database with some
+# geometry and basis information
+#
+# Make sure that the directory containing Xrtdb.py is in your PYTHONPATH
+
+start
+
+basis noprint
+  c library 3-21g
+  o library 3-21g
+end
+
+geometry noprint autosym
+  c 0 0 0
+  o 1 0 0 
+end
+
+python noprint
+  from Xrtdb import *
+  Xrtdb()
+end
+
+task python

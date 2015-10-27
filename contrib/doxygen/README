@@ -1,0 +1,61 @@
+DOXYGEN README
+==============
+
+This directory contains experimental material to generate source code
+documentation using Doxygen. 
+
+To generate the source code for all of NWChem documentation run
+
+	cd $NWCHEM_TOP
+	./contrib/docygen/run_doxygen
+
+To generate documentation for parts of NWChem you can invoke the run_doxygen
+script in any subdirectory.
+
+After this $NWCHEM_TOP/doxydocs/html should contain the source code
+documentation. At the moment very few files of NWChem have been provided with
+the appropriate comments. Hence the Doxygen documentation essentially only
+contains what the tool can extract from the source code itself.
+
+More information on Doxygen can be found at:
+
+ - http://www.stack.nl/~dimitri/doxygen
+
+Experience so far has been mixed:
+- Doxygen requires the right configuration settings to deal with Fortran
+  code.
+- Doxygen can generate about 4 GB of documentation for the NWChem source tree
+  in about 1 hour and 20 minutes. You can reduce this by using appropriate
+  options, but then the result is also less informative.
+- Doxygen can generate call treesi, caller trees and other diagrams. However
+  it seems that sometimes nodes are missing from these diagrams.
+Currently I am guessing that we will need multiple Doxygen configuration files
+and allow a developer to select one with a command line option on the 
+run_doxygen command line. Different options would then select more or less
+extensive documentation at different compile time and disk space requirements.
+
+INSTALLING DOXYGEN FOR NWCHEM
+=============================
+
+Prerequisites: Doxygen works best if the graphviz package is available to 
+draw call graphs and such like. It uses the executable "dot". All that is 
+required is to build and install graphviz so that "dot" is in your PATH.
+I tried Doxygen with graphviz-2.28.0.
+
+Installing Doxygen itself is relatively straightforward. Download the Doxygen
+package of your choice (the version with which I have tested this setup is
+listed at the top of doxygen.rc). With Doxygen 1.7.6.1 Fortran files with the
+.F extension were not recognized properly. In Doxygen 1.8.0 this problem has
+been fixed. To install Doxygen 1.8.0 only the usual steps are required:
+
+	cd doxygen-<version>/.
+	./configure --prefix <install dir>
+	make
+	make install
+
+After this you should be able to run Doxygen as described at the top of this
+file.
+
+----
+
+Happy coding, Huub.

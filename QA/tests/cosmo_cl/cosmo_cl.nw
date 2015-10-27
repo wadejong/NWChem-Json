@@ -1,0 +1,16 @@
+start cosmo_cl_dat
+echo
+title "Cl-"
+geometry
+  cl 0.0 0.0 0.0
+end
+charge -1
+basis
+  cl library 6-311+g*
+end
+cosmo
+end
+scf
+  print cosmo_energies
+end
+task scf energy

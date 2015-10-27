@@ -1,0 +1,225 @@
+#!/bin/bash
+#
+# Doxygen run script for NWChem
+#
+# Doxygen is a source code documentation tool. It interprets and analyses
+# the source code and writes a substantial chunk of documentation. The 
+# documentation can be enriched by providing more details in comment lines.
+# Doxygen is the defacto standard approach to documenting C-code. 
+#
+function usage()
+{
+   echo
+   echo " Usage: $0 [-h] [-g] [-t] [-m] [-s] [-u] [-v] [-l] [-j [<MathJax URL>]]"
+   echo
+   cat <<EOF
+ This script runs doxygen building a particular version of the NWChem source
+ code documentation. The command can be run in any directory and produces the
+ documentation in the directory ./doxydocs .
+
+ The command line flags are:
+
+ -h Show this information
+
+ -g Generate the full NWChem documentation, including various graphs such
+    as call trees, include trees, caller trees, etc. This is most useful
+    when information about how the code is put together is required.
+    This level of documentation takes the longest to generate and requires
+    the most disk space (about 80 minutes and generating around 4 GB of HTML).
+
+ -t (Default) Generate text only NWChem documentation. No graphs are generated
+    but headers and comments are included. This level of documentation is
+    useful when the information about how to use a module is required.
+    (Takes about 15 minutes and generates 300 MB of HTML).
+
+ -m Generate NWChem manpages. This is similar to the text only documentation
+    except that this documentation is formatted as UNIX manpages. This 
+    documentation is relatively compact (takes about 10 minutes and generates
+    around 200 MB).
+
+ -s Generate the NWChem documentation including the full source code. The
+    source code is formatted in HTML with cross-references between the
+    documentation and source code. This is likely to get big but might be
+    useful in figuring out how Doxygen interprets a piece of source code.
+    (This takes about 15 minutes and generates about 1 GB of documentation).
+
+ -u Update the Doxygen configurations files to a newer version of Doxygen.
+
+ -v Print the version information from the configuration files, Doxygen,
+    and the GraphViz dot program.
+
+ -l Use LaTeX to display equations. This option is mutually exclusive with
+    the -j option.
+
+ -j Enable MathJax to display equations. MathJax is a JavaScript display engine
+    that displays equations in your browser without needing any readers or
+    plugins. Because it processes equations in your browser the speed will 
+    depend on your machine performance and your browser. For example Internet
+    Explorer 8 took minutes to process a page and was unusably slow afterwards,
+    whereas Firefox 16 processed the same page in seconds and displayed without
+    noticable degradation. This option is mutually exclusive with the -l 
+    option.
+
+    Optionally the -j option may be followed by a specification of your local
+    MathJax installation or MathJax URL. If pointing to a directory provide the 
+    directory in which MathJax.js lives. The MathJax installation can also be
+    specified with MATHJAX_URL environment variable. If both are present the
+    argument of the -j flag takes precedence.
+
+EOF
+}
+if [ -f "$0" ] ; then
+   # The first item on the command line is an actual file so it must have
+   # been specified including the path.
+   path="`dirname \"$0\"`"
+else
+   # The first item on the command line is not a file so it must have been
+   # found in PATH.
+   path="`which \"$0\"`"
+   path="`dirname \"$path\"`"
+fi
+if [ ${#MATHJAX_URL} -ne 0 ] ; then
+  mjax_url="\"${MATHJAX_URL}\""
+fi
+mjax="yes"
+latex="no"
+task="doc"
+graph="no"
+src="no"
+man="no"
+text="yes"
+while [ $# -ge 1 ] ; do
+  case $1 in
+    -h) task="help" ; shift 1 ;;
+    -g) text="no"   ; graph="yes" ; man="no"  ; shift 1 ;;
+    -t) text="yes"  ; graph="no"  ; man="no"  ; shift 1 ;;
+    -m) text="no"   ; graph="no"  ; man="yes" ; shift 1 ;;
+    -s) src="yes"   ; shift 1 ;;
+    -u) task="update" ; shift 1 ;;
+    -v) task="version" ; shift 1 ;;
+    -l) mjax="no"   ; latex="yes" ; shift 1 ;;
+    -j) mjax="yes"  ; latex="no" ; shift 1 ;
+        test=$1 ;
+        if [ ${#test} -ne 0 ] ; then
+          if [ "${test:0:1}" != "-" ] ; then
+            mjax_url="$test"
+            shift 1
+          fi
+        fi ;;
+    *)  task="help" ; shift 1 ;;
+  esac
+done
+if [ ${#RUN_DOXYGEN_DEBUG} -ne 0 ]; then
+  echo "run_doxygen input options:"
+  echo "graph = " $graph
+  echo "latex = " $latex
+  echo "man   = " $man 
+  echo "mjax  = " $mjax
+  echo "src   = " $src 
+  echo "task  = " $task
+  echo "text  = " $text
+fi
+#
+# If all we need to do is to print the usage information, do it now and be done.
+#
+if [ "$task" == "help" ] ; then
+  usage
+  exit 0
+fi
+if [ "$task" == "doc" ] ; then
+  #
+  # Now we need to do something about the Doxygen configuration with respect to
+  # the locations of the include files. We cannot point to the common include
+  # directory as Doxygen will also find the include files in the source code
+  # directories. When Doxygen finds the same entities twice it gets confused
+  # and rejects all copies. So we need to find the include files in the source
+  # code directories, work out the set of unique directories they live in, and
+  # insert this into the Doxygen configuration file. After that we can invoke
+  # Doxygen itself.
+  #
+  echo "configuring Doxygen..."
+  echo "finding paths for include files..."
+  includedirs=`find "${path}/../../src" -name "*.*h" -print `
+  touch doxy$$.tmp
+  for file in $includedirs ; do
+     echo `dirname $file` >> doxya$$.tmp
+  done
+  grep -v "src/include" doxya$$.tmp | grep -v "install/include" | grep -v "tools/include" | sort -u > doxyb$$.tmp
+  includedirs=`cat doxyb$$.tmp`
+  echo "adding the include files paths:"
+  cat doxyb$$.tmp
+  rm -f doxya$$.tmp doxyb$$.tmp
+  #
+  grep -v "INCLUDE_PATH           =" "$path/doxygen.rc" > "$path/doxygen$$.rc"
+  echo "INCLUDE_PATH           =" $includedirs >> "$path/doxygen$$.rc"
+  if [ "$graph" == "yes" ] ; then
+    grep -v "GRAPH" "$path/doxygen$$.rc" > "$path/doxygen_tmp$$.rc"
+    echo "CLASS_GRAPH            = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "COLLABORATION_GRAPH    = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "GROUP_GRAPHS           = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "INCLUDE_GRAPH          = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "INCLUDED_BY_GRAPH      = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "CALL_GRAPH             = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "CALLER_GRAPH           = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "GRAPHICAL_HIERARCHY    = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "DIRECTORY_GRAPH        = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "DOT_GRAPH_MAX_NODES    = 100" >> "$path/doxygen_tmp$$.rc"
+    echo "MAX_DOT_GRAPH_DEPTH    = 0"   >> "$path/doxygen_tmp$$.rc"
+    mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+  fi
+  if [ "$src" == "yes" ] ; then
+    grep -v "SOURCE_BROWSER" "$path/doxygen$$.rc" > "$path/doxygen_tmp$$.rc"
+    echo "SOURCE_BROWSER         = YES" >> "$path/doxygen_tmp$$.rc"
+    mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+  fi
+  if [ "$man" == "yes" ] ; then
+    grep -v "GENERATE_HTML" "$path/doxygen$$.rc" | grep -v "GENERATE_MAN" \
+      | grep -v "MAN_LINKS" | grep -v "CLASS_DIAGRAMS" \
+      | grep -v "GENERATE_LEGEND" | grep -v "DOT_CLEANUP" > "$path/doxygen_tmp$$.rc"
+    echo "GENERATE_HTML          = NO"  >> "$path/doxygen_tmp$$.rc"
+    echo "GENERATE_MAN           = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "MAN_LINKS              = YES" >> "$path/doxygen_tmp$$.rc"
+    echo "CLASS_DIAGRAMS         = NO"  >> "$path/doxygen_tmp$$.rc"
+    echo "GENERATE_LEGEND        = NO"  >> "$path/doxygen_tmp$$.rc"
+    echo "DOT_CLEANUP            = NO"  >> "$path/doxygen_tmp$$.rc"
+    mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+  fi
+  if [ "$mjax" == "yes" ] ; then
+    grep -v "USE_MATHJAX" "$path/doxygen$$.rc" > "$path/doxygen_tmp$$.rc"
+    echo "USE_MATHJAX            = YES"  >> "$path/doxygen_tmp$$.rc"
+    mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+    if [ ${#mjax_url} -ne 0 ] ; then
+      grep -v "MATHJAX_RELPATH" "$path/doxygen$$.rc" > "$path/doxygen_tmp$$.rc"
+      echo "MATHJAX_RELPATH        = \"$mjax_url\""  >> "$path/doxygen_tmp$$.rc"
+      mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+    fi
+  elif [ "$mjax" == "no" ] ; then
+    grep -v "USE_MATHJAX" "$path/doxygen$$.rc" > "$path/doxygen_tmp$$.rc"
+    echo "USE_MATHJAX            = NO"  >> "$path/doxygen_tmp$$.rc"
+    mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+  fi
+  if [ "$latex" == "yes" ] ; then
+    grep -v "GENERATE_LATEX" "$path/doxygen$$.rc" > "$path/doxygen_tmp$$.rc"
+    echo "GENERATE_LATEX         = YES"  >> "$path/doxygen_tmp$$.rc"
+    mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+  elif [ "$latex" == "no" ] ; then 
+    grep -v "GENERATE_LATEX" "$path/doxygen$$.rc" > "$path/doxygen_tmp$$.rc"
+    echo "GENERATE_LATEX         = NO"   >> "$path/doxygen_tmp$$.rc"
+    mv -f "$path/doxygen_tmp$$.rc" "$path/doxygen$$.rc"
+  fi
+  date
+  doxygen "$path/doxygen$$.rc"
+  rm -f "$path/doxygen$$.rc"
+  date
+elif [ "$task" == "update" ] ; then
+  doxygen -u "$path/doxygen.rc"
+elif [ "$task" == "version" ] ; then
+  echo "$Id: run_doxygen 27014 2015-04-23 21:14:43Z d3y133 $"
+  grep Doxyfile "$path"/*.rc
+  echo -n "Doxygen "; doxygen --version
+  dot -V 2>&1 cat
+else
+  usage
+  exit 1
+fi
+exit 0

@@ -1,0 +1,22 @@
+       interface
+#if !defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+#if defined(NWAD_PRINT)
+         subroutine nwxc_rks_c_ft97_p(r,g,fc,dfdrac,dfdgaac,tol_rho)
+           use nwadp1
+#else
+         subroutine nwxc_rks_c_ft97(r,g,fc,dfdrac,dfdgaac,tol_rho)
+           use nwad1
+#endif
+#elif defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+         subroutine nwxc_rks_c_ft97_d2(r,g,fc,dfdrac,dfdgaac,tol_rho)
+           use nwad2
+#else
+         subroutine nwxc_rks_c_ft97_d3(r,g,fc,dfdrac,dfdgaac,tol_rho)
+           use nwad3
+#endif
+           implicit none
+           type(nwad_dble)::r,g,fc
+           double precision dfdrac,dfdgaac,tol_rho
+         end subroutine
+       end interface
+c $Id: intf_nwxc_rks_c_ft97.fh 26391 2014-11-16 07:19:39Z d3y133 $

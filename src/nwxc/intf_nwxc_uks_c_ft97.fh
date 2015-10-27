@@ -1,0 +1,27 @@
+       interface
+#if !defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+#if defined(NWAD_PRINT)
+         subroutine nwxc_uks_c_ft97_p(tol_rho,ra,rb,gaa,gbb,
+     +              fc,dfdrac,dfdrbc,dfdgaac,dfdgbbc)
+           use nwadp1
+#else
+         subroutine nwxc_uks_c_ft97(tol_rho,ra,rb,gaa,gbb,
+     +              fc,dfdrac,dfdrbc,dfdgaac,dfdgbbc)
+           use nwad1
+#endif
+#elif defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+         subroutine nwxc_uks_c_ft97_d2(tol_rho,ra,rb,gaa,gbb,
+     +              fc,dfdrac,dfdrbc,dfdgaac,dfdgbbc)
+           use nwad2
+#else
+         subroutine nwxc_uks_c_ft97_d3(tol_rho,ra,rb,gaa,gbb,
+     +              fc,dfdrac,dfdrbc,dfdgaac,dfdgbbc)
+           use nwad3
+#endif
+           implicit none
+           double precision tol_rho
+           type(nwad_dble)::ra,rb,gaa,gbb,fc
+           double precision dfdrac,dfdrbc,dfdgaac,dfdgbbc
+         end subroutine
+       end interface
+c $Id: intf_nwxc_uks_c_ft97.fh 26391 2014-11-16 07:19:39Z d3y133 $

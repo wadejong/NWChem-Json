@@ -1,0 +1,11 @@
+*fordeck filesize.fh $Revision: 7.7 $
+*----------------------------------------------------------------------*
+* Define the largest file that can be handeled by the IO system        *
+* (units=Bytes)                                                        *
+*----------------------------------------------------------------------*
+#ifdef _I8_
+      Parameter ( max_File_Length = 214748364700 )
+#else
+      Parameter ( max_File_Length = 2147483647 )
+#endif
+c $Id: filesize.fh 25744 2014-06-08 07:43:42Z d3y133 $

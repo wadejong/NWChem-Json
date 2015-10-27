@@ -1,0 +1,48 @@
+echo
+
+start
+
+# Test of two-layer ONIOM geometry optimization and unscaled frequencies
+# for acetaldehyde following
+# Dapprich, Komaromi, Byun, Morokuma and Frisch, J. Mol. Struct (Theochem)
+# 461-462 (1999) 1-21.
+
+# Vibrational frequencies and geometry are correctly reproduced.
+# See end for the correct output, or look in the paper.
+
+geometry # sto-3g optmized geometry
+  O     0.25977444     1.26351414    -0.32184727
+  H    -1.42512409     0.38186873     0.37668588
+  C    -0.38369252     0.28899452     0.02138351
+  H     0.11527688    -1.57028792     1.00746379
+  H    -0.46513157    -1.76803678    -0.64211149
+  H     1.17645788    -1.17137932    -0.35247229
+  C     0.15223603    -1.15091137     0.00543109
+end
+
+basis sto-3g
+  h library sto-3g
+  c library sto-3g
+  o library sto-3g
+end
+
+basis dunning 
+  h library "SV (Dunning-Hay)"
+  c library "SV (Dunning-Hay)"
+  o library "SV (Dunning-Hay)"
+end
+
+scf; thresh 1e-6; end
+dft; xc b3lyp; grid fine; convergence density 1e-6; end
+
+oniom 
+  print low 
+  high dft basis dunning
+  low  scf basis sto-3g
+  model 3  3 7 0.709
+end
+
+driver; clear; end  # So that results are more reproducible
+task oniom optimize
+
+task oniom freq

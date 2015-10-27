@@ -1,0 +1,19 @@
+echo
+#
+# This test is designed to fail !
+#
+start h2o
+
+geometry units au
+ O 0       0        0
+ H 0       1.430   -1.107
+ H 0      -1.430   -1.107
+end
+
+
+basis
+  O library 6-31g*
+  H library 6-31g*
+end
+
+task scf gradient

@@ -1,0 +1,212 @@
+title "CH3Cl optimization"
+
+
+#memory 950 mb
+
+start ch3cl.pspw
+
+charge 0
+
+geometry
+C             1.141270   -0.000034    0.000004
+Cl           -0.664540    0.000021   -0.000006
+H             1.483169   -0.877342   -0.547984
+H             1.483210    0.913220   -0.485690
+H             1.483190   -0.036019    1.033759
+end
+
+############################################################
+######### Grid expansion and cell change testing ###########
+############################################################
+set nwpw:minimizer 2
+
+nwpw 
+   simulation_cell
+     SC 20.0
+     ngrid 8 8 8
+   end
+end
+task pspw energy
+nwpw 
+   simulation_cell
+     FCC 32.0
+     ngrid 16 16 16
+   end
+end
+task pspw energy
+
+nwpw
+   simulation_cell
+     lattice
+       lat_a 18.0
+       lat_b 18.2
+       lat_c 18.2
+     end
+   end
+end
+task pspw energy
+
+nwpw
+   simulation_cell
+     lattice_vectors
+       19.0 0.0  0.0
+        0.0 19.0 0.0
+        0.0  0.0 19.0 
+   end
+end
+task pspw energy
+
+### add virtual orbital  testing ###
+set nwpw:excited_ne 4 0
+
+nwpw 
+   simulation_cell
+     BCC 32.0
+   end
+end
+task pspw energy
+
+
+nwpw 
+   simulation_cell
+     SC 20.0
+   end
+end
+task pspw energy
+
+nwpw 
+   simulation_cell
+     ngrid 32 32 32
+   end
+end
+task pspw energy
+
+############################################
+####### steepest descent testing ###########
+############################################
+nwpw
+  steepest_descent
+    fake_mass 400000.0d0
+    time_step 51.8d0
+    loop 10 10
+   end
+end
+task pspw steepest_descent
+
+
+############################################
+######### Minimizer testing ################
+############################################
+
+#### testing Grassman CG minimizer ####
+set nwpw:minimizer 1
+task pspw energy
+
+#### testing Grassman LMBBFGS minimizer ####
+set nwpw:minimizer 2
+task pspw energy
+
+#### testing Grassman DIIS minimizer ####
+set nwpw:minimizer 3
+task pspw energy
+
+#### testing Stiefel CG minimizer ####
+set nwpw:minimizer 4
+task pspw energy
+
+#### testing SCF - Simple mixing minimizer ####
+set nwpw:minimizer 5
+set nwpw:scf_algorithm 0
+#set nwpw:ks_alpha 0.2
+#set nwpw:precondition .true.
+task pspw energy
+
+#### testing SCF - Anderson mixing minimizer ####
+set nwpw:minimizer 5
+set nwpw:scf_algorithm 1
+task pspw energy
+
+#### testing SCF - Johnson mixing minimizer ####
+set nwpw:minimizer 5
+set nwpw:scf_algorithm 2
+task pspw energy
+
+#### testing Projected Grassman LMBFGS minimizer ####
+set nwpw:minimizer 6
+task pspw energy
+
+
+
+#### testing Stiefel LMBFGS minimizer ####
+set nwpw:minimizer 7
+task pspw energy
+
+
+
+############################################
+############## PBE96 testing ###############
+############################################
+set nwpw:minimizer 2
+
+nwpw
+   xc pbe96
+end
+task pspw energy
+
+############################################
+########### Free-Space testing #############
+############################################
+set nwpw:minimizer 2
+
+nwpw
+   simulation_cell
+     boundary_conditions aperiodic
+   end
+   xc pbe96
+end
+task pspw energy
+
+
+############################################
+########### Mulliken testing ###############
+############################################
+set nwpw:minimizer 2
+
+### lcao projection ###
+nwpw
+   Mulliken lcao
+end
+task pspw energy
+
+### Kawai projection ###
+nwpw
+   Mulliken kawai
+end
+task pspw energy
+
+
+
+############################################
+########### Efield testing #################
+############################################
+set nwpw:minimizer 2
+
+nwpw
+   Mulliken 
+   efield
+end
+task pspw energy
+
+
+############################################
+############## APC testing #################
+############################################
+set nwpw:minimizer 2
+
+set pspw_APC:Gc 2.5
+set pspw_APC:nga 3
+set pspw_APC:gamma 0.6 0.9 1.35
+
+task pspw energy
+
+

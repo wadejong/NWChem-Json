@@ -1,0 +1,34 @@
+echo
+start h2o_diag_to_cg_dat
+
+geometry units au
+ O 0       0        0
+ H 0       1.430   -1.107
+ H 0      -1.430   -1.107
+end
+charge 1
+
+
+basis
+  O library 6-31g*
+  H library 6-31g*
+end
+
+dft
+  xc b3lyp
+  mult 2
+  iterations 2
+  convergence nr 0.0
+end
+
+task dft ignore
+
+dft
+  cgmin
+  odft
+  xc b3lyp
+  iterations 15
+  convergence nr 0.0
+end
+
+task dft

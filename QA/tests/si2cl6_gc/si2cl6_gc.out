@@ -1,0 +1,1352 @@
+All connections between all procs tested: SUCCESS
+ argument  1 = si2cl6_gc.nw
+
+
+
+============================== echo of input deck ==============================
+echo
+
+start si2cl6
+
+title "disilicon hexachloride McM-D test"
+
+geometry units angstrom autosym
+  Si  0.0     0.0      0.0
+  Si  1.35    1.35     1.35
+  Cl  2.5     2.5      0.2
+  Cl  2.5     0.2      2.5
+  Cl  0.2     2.5      2.5
+  Cl -1.15   -1.15     1.15
+  Cl -1.15    1.15    -1.15
+  Cl  1.15   -1.15    -1.15
+end
+
+basis segbas spherical noprint
+  Si library cc-pvdz
+  Cl  library aug-cc-pvdz
+end
+
+
+set atomscf:tags_z Si Cl
+set atomscf:z +1.5 -0.5
+set int:cando_txs logical false
+set int:cando_hnd logical false
+
+scf
+ thresh 1e-10
+ vectors atomic
+end
+set "ao basis" segbas
+task scf
+
+================================================================================
+
+
+                                         
+                                         
+
+
+              Northwest Computational Chemistry Package (NWChem) 6.3
+              ------------------------------------------------------
+
+
+                    Environmental Molecular Sciences Laboratory
+                       Pacific Northwest National Laboratory
+                                Richland, WA 99352
+
+                              Copyright (c) 1994-2013
+                       Pacific Northwest National Laboratory
+                            Battelle Memorial Institute
+
+             NWChem is an open-source computational chemistry package
+                        distributed under the terms of the
+                      Educational Community License (ECL) 2.0
+             A copy of the license is included with this distribution
+                              in the LICENSE.TXT file
+
+                                  ACKNOWLEDGMENT
+                                  --------------
+
+            This software and its documentation were developed at the
+            EMSL at Pacific Northwest National Laboratory, a multiprogram
+            national laboratory, operated for the U.S. Department of Energy
+            by Battelle under Contract Number DE-AC05-76RL01830. Support
+            for this work was provided by the Department of Energy Office
+            of Biological and Environmental Research, Office of Basic
+            Energy Sciences, and the Office of Advanced Scientific Computing.
+
+
+           Job information
+           ---------------
+
+    hostname        = arcen
+    program         = ../../../bin/LINUX64/nwchem
+    date            = Tue Jun 10 11:14:06 2014
+
+    compiled        = Mon_Jun_09_18:58:33_2014
+    source          = /home/d3y133/nwchem-dev/nwchem-dev-2014-02-17
+    nwchem branch   = Development
+    nwchem revision = 25741
+    ga revision     = 10496
+    input           = si2cl6_gc.nw
+    prefix          = si2cl6.
+    data base       = ./si2cl6.db
+    status          = startup
+    nproc           =        1
+    time left       =     -1s
+
+
+
+           Memory information
+           ------------------
+
+    heap     =   13107196 doubles =    100.0 Mbytes
+    stack    =   13107201 doubles =    100.0 Mbytes
+    global   =   26214400 doubles =    200.0 Mbytes (distinct from heap & stack)
+    total    =   52428797 doubles =    400.0 Mbytes
+    verify   = yes
+    hardfail = no 
+
+
+           Directory information
+           ---------------------
+
+  0 permanent = .
+  0 scratch   = .
+
+
+
+
+                                NWChem Input Module
+                                -------------------
+
+
+                         disilicon hexachloride McM-D test
+                         ---------------------------------
+
+ Scaling coordinates for geometry "geometry" by  1.889725989
+ (inverse scale =  0.529177249)
+
+ D3D symmetry detected
+
+          ------
+          auto-z
+          ------
+
+
+                             Geometry "geometry" -> ""
+                             -------------------------
+
+ Output coordinates in angstroms (scale by  1.889725989 to convert to a.u.)
+
+  No.       Tag          Charge          X              Y              Z
+ ---- ---------------- ---------- -------------- -------------- --------------
+    1 Si                  14.0000     0.00000000     0.00000000    -1.16913430
+    2 Si                  14.0000     0.00000000     0.00000000     1.16913430
+    3 Cl                  17.0000    -1.32790562     1.32790562     1.83308710
+    4 Cl                  17.0000     1.81395281     0.48604719     1.83308710
+    5 Cl                  17.0000    -0.48604719    -1.81395281     1.83308710
+    6 Cl                  17.0000     1.32790562    -1.32790562    -1.83308710
+    7 Cl                  17.0000    -1.81395281    -0.48604719    -1.83308710
+    8 Cl                  17.0000     0.48604719     1.81395281    -1.83308710
+
+      Atomic Mass 
+      ----------- 
+
+      Si                27.976930
+      Cl                34.968850
+
+
+ Effective nuclear repulsion energy (a.u.)    1229.4057625114
+
+            Nuclear Dipole moment (a.u.) 
+            ----------------------------
+        X                 Y               Z
+ ---------------- ---------------- ----------------
+     0.0000000000     0.0000000000     0.0000000000
+
+      Symmetry information
+      --------------------
+
+ Group name             D3d       
+ Group number             33
+ Group order              12
+ No. of unique centers     2
+
+      Symmetry unique atoms
+
+     1    3
+
+
+
+                                Z-matrix (autoz)
+                                -------- 
+
+ Units are Angstrom for bonds and degrees for angles
+
+      Type          Name      I     J     K     L     M      Value
+      ----------- --------  ----- ----- ----- ----- ----- ----------
+    1 Stretch                  1     2                       2.33827
+    2 Stretch                  1     6                       1.99186
+    3 Stretch                  1     7                       1.99186
+    4 Stretch                  1     8                       1.99186
+    5 Stretch                  2     3                       1.99186
+    6 Stretch                  2     4                       1.99186
+    7 Stretch                  2     5                       1.99186
+    8 Bend                     1     2     3               109.47122
+    9 Bend                     1     2     4               109.47122
+   10 Bend                     1     2     5               109.47122
+   11 Bend                     2     1     6               109.47122
+   12 Bend                     2     1     7               109.47122
+   13 Bend                     2     1     8               109.47122
+   14 Bend                     3     2     4               109.47122
+   15 Bend                     3     2     5               109.47122
+   16 Bend                     4     2     5               109.47122
+   17 Bend                     6     1     7               109.47122
+   18 Bend                     6     1     8               109.47122
+   19 Bend                     7     1     8               109.47122
+   20 Torsion                  3     2     1     6         180.00000
+   21 Torsion                  3     2     1     7         -60.00000
+   22 Torsion                  3     2     1     8          60.00000
+   23 Torsion                  4     2     1     6          60.00000
+   24 Torsion                  4     2     1     7         180.00000
+   25 Torsion                  4     2     1     8         -60.00000
+   26 Torsion                  5     2     1     6         -60.00000
+   27 Torsion                  5     2     1     7          60.00000
+   28 Torsion                  5     2     1     8         180.00000
+
+
+            XYZ format geometry
+            -------------------
+     8
+ geometry
+ Si                    0.00000000     0.00000000    -1.16913430
+ Si                    0.00000000     0.00000000     1.16913430
+ Cl                   -1.32790562     1.32790562     1.83308710
+ Cl                    1.81395281     0.48604719     1.83308710
+ Cl                   -0.48604719    -1.81395281     1.83308710
+ Cl                    1.32790562    -1.32790562    -1.83308710
+ Cl                   -1.81395281    -0.48604719    -1.83308710
+ Cl                    0.48604719     1.81395281    -1.83308710
+
+ ==============================================================================
+                                internuclear distances
+ ------------------------------------------------------------------------------
+       center one      |      center two      | atomic units |  angstroms
+ ------------------------------------------------------------------------------
+    2 Si               |   1 Si               |     4.41869  |     2.33827
+    3 Cl               |   2 Si               |     3.76407  |     1.99186
+    4 Cl               |   2 Si               |     3.76407  |     1.99186
+    5 Cl               |   2 Si               |     3.76407  |     1.99186
+    6 Cl               |   1 Si               |     3.76407  |     1.99186
+    7 Cl               |   1 Si               |     3.76407  |     1.99186
+    8 Cl               |   1 Si               |     3.76407  |     1.99186
+ ------------------------------------------------------------------------------
+                         number of included internuclear distances:          7
+ ==============================================================================
+
+
+
+ ==============================================================================
+                                 internuclear angles
+ ------------------------------------------------------------------------------
+        center 1       |       center 2       |       center 3       |  degrees
+ ------------------------------------------------------------------------------
+    2 Si               |   1 Si               |   6 Cl               |   109.47
+    2 Si               |   1 Si               |   7 Cl               |   109.47
+    2 Si               |   1 Si               |   8 Cl               |   109.47
+    6 Cl               |   1 Si               |   7 Cl               |   109.47
+    6 Cl               |   1 Si               |   8 Cl               |   109.47
+    7 Cl               |   1 Si               |   8 Cl               |   109.47
+    1 Si               |   2 Si               |   3 Cl               |   109.47
+    1 Si               |   2 Si               |   4 Cl               |   109.47
+    1 Si               |   2 Si               |   5 Cl               |   109.47
+    3 Cl               |   2 Si               |   4 Cl               |   109.47
+    3 Cl               |   2 Si               |   5 Cl               |   109.47
+    4 Cl               |   2 Si               |   5 Cl               |   109.47
+ ------------------------------------------------------------------------------
+                            number of included internuclear angles:         12
+ ==============================================================================
+
+
+
+                                 NWChem SCF Module
+                                 -----------------
+
+
+                         disilicon hexachloride McM-D test
+
+
+
+  ao basis        = "segbas"
+  functions       =   198
+  atoms           =     8
+  closed shells   =    65
+  open shells     =     0
+  charge          =   0.00
+  wavefunction    = RHF 
+  input vectors   = atomic
+  output vectors  = ./si2cl6.movecs
+  use symmetry    = T
+  symmetry adapt  = T
+
+
+ Summary of "ao basis" -> "segbas" (spherical)
+ ------------------------------------------------------------------------------
+       Tag                 Description            Shells   Functions and Types
+ ---------------- ------------------------------  ------  ---------------------
+ Si                         cc-pvdz                  8       18   4s3p1d
+ Cl                       aug-cc-pvdz               11       27   5s4p2d
+
+
+      Symmetry analysis of basis
+      --------------------------
+
+        a1g        27
+        a1u         8
+        a2g         8
+        a2u        27
+        eg         64
+        eu         64
+
+  int_init: cando_txs set to always be  F
+  int_init: cando_hnd set to always be  F
+
+ Forming initial guess at       0.7s
+
+
+      Superposition of Atomic Density Guess
+      -------------------------------------
+
+ Atomic density modified by a delta charge of   1.50 for atom tag Si
+ Atomic density modified by a delta charge of  -0.50 for atom tag Cl
+  
+ Sum of atomic energies:       -3334.52717338
+
+      Non-variational initial energy
+      ------------------------------
+
+ Total energy =   -3336.611709
+ 1-e energy   =   -7060.119559
+ 2-e energy   =    2494.102088
+ HOMO         =      -0.438423
+ LUMO         =      -0.106569
+
+
+      Symmetry analysis of molecular orbitals - initial
+      -------------------------------------------------
+
+  Numbering of irreducible representations: 
+
+     1 a1g         2 a1u         3 a2g         4 a2u         5 eg      
+     6 eu      
+
+  Orbital symmetries:
+
+     1 a1g         2 a2u         3 eu          4 eu          5 eg      
+     6 eg          7 a1g         8 a2u         9 a1g        10 a2u     
+    11 eu         12 eu         13 eg         14 eg         15 a1g     
+    16 a2u        17 eu         18 eu         19 eg         20 eg      
+    21 a1g        22 a2u        23 eu         24 eu         25 eg      
+    26 eg         27 eu         28 eu         29 eg         30 eg      
+    31 a2g        32 a1u        33 a1g        34 a2u        35 a1g     
+    36 a2u        37 eu         38 eu         39 eg         40 eg      
+    41 a1g        42 a2u        43 eu         44 eu         45 eg      
+    46 eg         47 a1g        48 a2u        49 a1g        50 eu      
+    51 eu         52 eg         53 eg         54 a2u        55 eg      
+    56 eg         57 eu         58 eu         59 eu         60 eu      
+    61 eg         62 eg         63 a1u        64 a2g        65 a1g     
+    66 a2u        67 eu         68 eu         69 a1g        70 a2u     
+    71 eg         72 eg         73 a1g        74 eu         75 eu      
+
+
+ Starting SCF solution at      12.9s
+
+
+
+ ----------------------------------------------
+         Quadratically convergent ROHF
+
+ Convergence threshold     :          1.000E-10
+ Maximum no. of iterations :           30
+ Final Fock-matrix accuracy:          1.000E-12
+ ----------------------------------------------
+
+
+ Integral file          = ./si2cl6.aoints.0
+ Record size in doubles =    65536    No. of integs per rec  =    43688
+ Max. records in memory =        0    Max. records in file   = ********
+ No. of bits per label  =        8    No. of bits per value  =       64
+
+
+ #quartets = 6.717D+05 #integrals = 2.100D+07 #direct =  0.0% #cached =100.0%
+
+
+              iter       energy          gnorm     gmax       time
+             ----- ------------------- --------- --------- --------
+                 1    -3335.0768037511  1.22D+00  4.30D-01     56.0
+ Warning: symmetry breaking in RHF:   1.048587583950267E-011
+                 2    -3335.1937834450  3.04D-01  5.77D-02     57.3
+                 3    -3335.2059667845  2.44D-02  4.25D-03     58.9
+                 4    -3335.2060594027  1.73D-04  2.09D-05     61.3
+                 5    -3335.2060594062  8.42D-09  1.34D-09     65.2
+                 6    -3335.2060594059  1.16D-11  2.76D-12     68.0
+
+
+       Final RHF  results 
+       ------------------ 
+
+         Total SCF energy =  -3335.206059405899
+      One-electron energy =  -7066.338994029343
+      Two-electron energy =   2501.727172111999
+ Nuclear repulsion energy =   1229.405762511444
+
+        Time for solution =     55.3s
+
+
+
+       Symmetry analysis of molecular orbitals - final
+       -----------------------------------------------
+
+  Numbering of irreducible representations: 
+
+     1 a1g         2 a1u         3 a2g         4 a2u         5 eg      
+     6 eu      
+
+  Orbital symmetries:
+
+     1 eg          2 eg          3 a2u         4 a1g         5 eu      
+     6 eu          7 a1g         8 a2u         9 eg         10 eg      
+    11 eu         12 eu         13 a1g        14 a2u        15 eu      
+    16 eu         17 eg         18 eg         19 a2u        20 a1g     
+    21 eu         22 eu         23 eg         24 eg         25 a1g     
+    26 a2u        27 a2g        28 a1u        29 eg         30 eg      
+    31 eu         32 eu         33 a1g        34 a2u        35 eu      
+    36 eu         37 eg         38 eg         39 a1g        40 a2u     
+    41 a1g        42 a2u        43 eu         44 eu         45 eg      
+    46 eg         47 a1g        48 a2u        49 eu         50 eu      
+    51 a1g        52 eg         53 eg         54 a2u        55 eg      
+    56 eg         57 eu         58 eu         59 eu         60 eu      
+    61 eg         62 eg         63 a1u        64 a2g        65 a1g     
+    66 eu         67 eu         68 a2u        69 a1g        70 eg      
+    71 eg         72 eu         73 eu         74 a2u        75 a1g     
+
+             Final eigenvalues
+             -----------------
+
+              1      
+    1 -104.8579
+    2 -104.8579
+    3 -104.8579
+    4 -104.8579
+    5 -104.8579
+    6 -104.8579
+    7  -68.9210
+    8  -68.9210
+    9  -10.5882
+   10  -10.5882
+   11  -10.5882
+   12  -10.5882
+   13  -10.5882
+   14  -10.5882
+   15   -8.0555
+   16   -8.0555
+   17   -8.0555
+   18   -8.0555
+   19   -8.0555
+   20   -8.0555
+   21   -8.0525
+   22   -8.0525
+   23   -8.0525
+   24   -8.0525
+   25   -8.0525
+   26   -8.0525
+   27   -8.0525
+   28   -8.0525
+   29   -8.0525
+   30   -8.0525
+   31   -8.0525
+   32   -8.0525
+   33   -6.2602
+   34   -6.2601
+   35   -4.3672
+   36   -4.3672
+   37   -4.3671
+   38   -4.3671
+   39   -4.3653
+   40   -4.3645
+   41   -1.1803
+   42   -1.1706
+   43   -1.1275
+   44   -1.1275
+   45   -1.1245
+   46   -1.1245
+   47   -0.7611
+   48   -0.7006
+   49   -0.6042
+   50   -0.6042
+   51   -0.6003
+   52   -0.5907
+   53   -0.5907
+   54   -0.5281
+   55   -0.5226
+   56   -0.5226
+   57   -0.5165
+   58   -0.5165
+   59   -0.4981
+   60   -0.4981
+   61   -0.4832
+   62   -0.4832
+   63   -0.4758
+   64   -0.4713
+   65   -0.4193
+   66    0.0785
+   67    0.0785
+   68    0.0815
+   69    0.0873
+   70    0.1057
+   71    0.1057
+   72    0.1127
+   73    0.1127
+   74    0.1277
+   75    0.1292
+
+                       ROHF Final Molecular Orbital Analysis
+                       -------------------------------------
+
+ Vector   41  Occ=2.000000D+00  E=-1.180251D+00  Symmetry=a1g
+              MO Center=  1.6D-16,  1.1D-16,  3.2D-16, r^2= 6.2D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    40      0.213946  3 Cl s                 67      0.213946  4 Cl s          
+    94      0.213946  5 Cl s                121      0.213946  6 Cl s          
+   148      0.213946  7 Cl s                175      0.213946  8 Cl s          
+    39      0.180814  3 Cl s                 66      0.180814  4 Cl s          
+    93      0.180814  5 Cl s                120      0.180814  6 Cl s          
+
+ Vector   42  Occ=2.000000D+00  E=-1.170619D+00  Symmetry=a2u
+              MO Center= -7.7D-16,  1.1D-16, -2.3D-15, r^2= 6.4D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    40      0.219976  3 Cl s                 67      0.219976  4 Cl s          
+    94      0.219976  5 Cl s                121     -0.219976  6 Cl s          
+   148     -0.219976  7 Cl s                175     -0.219976  8 Cl s          
+    39      0.186182  3 Cl s                 66      0.186182  4 Cl s          
+    93      0.186182  5 Cl s                120     -0.186182  6 Cl s          
+
+ Vector   43  Occ=2.000000D+00  E=-1.127486D+00  Symmetry=eu
+              MO Center=  2.0D-15,  2.5D-15, -2.7D-15, r^2= 7.0D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    39      0.276642  3 Cl s                 40      0.277624  3 Cl s          
+   120     -0.276642  6 Cl s                121     -0.277624  6 Cl s          
+    93     -0.228914  5 Cl s                 94     -0.229727  5 Cl s          
+   174      0.228914  8 Cl s                175      0.229727  8 Cl s          
+
+ Vector   44  Occ=2.000000D+00  E=-1.127486D+00  Symmetry=eu
+              MO Center=  8.3D-15, -9.7D-15,  6.7D-15, r^2= 7.0D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    66      0.291883  4 Cl s                 67      0.292919  4 Cl s          
+   147     -0.291883  7 Cl s                148     -0.292919  7 Cl s          
+    93     -0.187275  5 Cl s                 94     -0.187940  5 Cl s          
+   174      0.187275  8 Cl s                175      0.187940  8 Cl s          
+
+ Vector   45  Occ=2.000000D+00  E=-1.124541D+00  Symmetry=eg
+              MO Center=  3.4D-15,  1.0D-15, -6.7D-17, r^2= 7.0D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    94      0.304780  5 Cl s                175      0.304780  8 Cl s          
+    93      0.294087  5 Cl s                174      0.294087  8 Cl s          
+    67     -0.181229  4 Cl s                148     -0.181229  7 Cl s          
+    66     -0.174870  4 Cl s                147     -0.174870  7 Cl s          
+
+ Vector   46  Occ=2.000000D+00  E=-1.124541D+00  Symmetry=eg
+              MO Center= -1.9D-15,  4.7D-15,  1.3D-15, r^2= 7.0D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    40      0.280597  3 Cl s                121      0.280597  6 Cl s          
+    39      0.270752  3 Cl s                120      0.270752  6 Cl s          
+    67     -0.247297  4 Cl s                148     -0.247297  7 Cl s          
+    66     -0.238621  4 Cl s                147     -0.238621  7 Cl s          
+
+ Vector   47  Occ=2.000000D+00  E=-7.610963D-01  Symmetry=a1g
+              MO Center= -5.6D-16, -3.6D-15,  9.4D-16, r^2= 5.6D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     3      0.306669  1 Si s                 21      0.306669  2 Si s          
+
+ Vector   48  Occ=2.000000D+00  E=-7.006040D-01  Symmetry=a2u
+              MO Center=  3.6D-17, -3.3D-17, -8.2D-17, r^2= 7.4D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     3      0.266047  1 Si s                 21     -0.266047  2 Si s          
+    72      0.171375  4 Cl px               100     -0.171375  5 Cl py         
+   153      0.171375  7 Cl px               181     -0.171375  8 Cl py         
+
+ Vector   49  Occ=2.000000D+00  E=-6.041649D-01  Symmetry=eu
+              MO Center=  1.5D-15,  1.4D-15, -5.4D-16, r^2= 7.3D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    72      0.230978  4 Cl px               153      0.230978  7 Cl px         
+     8     -0.182672  1 Si px                26     -0.182672  2 Si px         
+   100      0.167533  5 Cl py               181      0.167533  8 Cl py         
+
+ Vector   50  Occ=2.000000D+00  E=-6.041649D-01  Symmetry=eu
+              MO Center= -1.6D-15,  4.1D-15,  4.5D-16, r^2= 7.3D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    45      0.189567  3 Cl px               126      0.189567  6 Cl px         
+     9      0.182672  1 Si py                27      0.182672  2 Si py         
+   100     -0.159013  5 Cl py               181     -0.159013  8 Cl py         
+
+ Vector   51  Occ=2.000000D+00  E=-6.002983D-01  Symmetry=a1g
+              MO Center= -1.5D-16, -1.2D-16,  3.0D-16, r^2= 6.0D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    10      0.215409  1 Si pz                28     -0.215409  2 Si pz         
+
+ Vector   52  Occ=2.000000D+00  E=-5.906997D-01  Symmetry=eg
+              MO Center= -1.0D-15,  2.7D-16, -3.8D-16, r^2= 7.4D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+   100      0.245826  5 Cl py               181     -0.245826  8 Cl py         
+    45     -0.188853  3 Cl px               126      0.188853  6 Cl px         
+     9      0.187608  1 Si py                27     -0.187608  2 Si py         
+
+ Vector   53  Occ=2.000000D+00  E=-5.906997D-01  Symmetry=eg
+              MO Center=  2.9D-15, -5.4D-15,  3.7D-16, r^2= 7.4D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    46      0.209340  3 Cl py                72     -0.208606  4 Cl px         
+   127     -0.209340  6 Cl py               153      0.208606  7 Cl px         
+     8     -0.187608  1 Si px                26      0.187608  2 Si px         
+
+ Vector   54  Occ=2.000000D+00  E=-5.281094D-01  Symmetry=a2u
+              MO Center= -2.6D-15,  2.1D-14, -2.1D-16, r^2= 7.6D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    47      0.230524  3 Cl pz                74      0.230524  4 Cl pz         
+   101      0.230524  5 Cl pz               128      0.230524  6 Cl pz         
+   155      0.230524  7 Cl pz               182      0.230524  8 Cl pz         
+    50      0.182476  3 Cl pz                77      0.182476  4 Cl pz         
+   104      0.182476  5 Cl pz               131      0.182476  6 Cl pz         
+
+ Vector   55  Occ=2.000000D+00  E=-5.225743D-01  Symmetry=eg
+              MO Center= -1.3D-15,  7.9D-16, -6.0D-17, r^2= 7.7D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    74      0.204724  4 Cl pz                99      0.204598  5 Cl px         
+   155     -0.204724  7 Cl pz               180     -0.204598  8 Cl px         
+    45      0.188767  3 Cl px               126     -0.188767  6 Cl px         
+   102      0.155777  5 Cl px               183     -0.155777  8 Cl px         
+    77      0.150323  4 Cl pz               158     -0.150323  7 Cl pz         
+
+ Vector   56  Occ=2.000000D+00  E=-5.225743D-01  Symmetry=eg
+              MO Center= -4.7D-14,  2.1D-14, -3.8D-13, r^2= 7.7D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    73      0.241056  4 Cl py               154     -0.241056  7 Cl py         
+    47      0.193728  3 Cl pz               128     -0.193728  6 Cl pz         
+    76      0.188762  4 Cl py               157     -0.188762  7 Cl py         
+   101     -0.160864  5 Cl pz               182      0.160864  8 Cl pz         
+
+ Vector   57  Occ=2.000000D+00  E=-5.164789D-01  Symmetry=eu
+              MO Center=  1.4D-14,  2.0D-14,  1.5D-13, r^2= 7.7D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+   101      0.221750  5 Cl pz               182      0.221750  8 Cl pz         
+    73     -0.181503  4 Cl py               154     -0.181503  7 Cl py         
+    46     -0.175546  3 Cl py               127     -0.175546  6 Cl py         
+    45     -0.171318  3 Cl px               126     -0.171318  6 Cl px         
+   104      0.169570  5 Cl pz               185      0.169570  8 Cl pz         
+
+ Vector   58  Occ=2.000000D+00  E=-5.164789D-01  Symmetry=eu
+              MO Center=  2.0D-14, -1.7D-14,  2.3D-13, r^2= 7.7D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    99     -0.239871  5 Cl px               180     -0.239871  8 Cl px         
+    47      0.218444  3 Cl pz               128      0.218444  6 Cl pz         
+   102     -0.181145  5 Cl px               183     -0.181145  8 Cl px         
+    73      0.167878  4 Cl py               154      0.167878  7 Cl py         
+    50      0.167042  3 Cl pz               131      0.167042  6 Cl pz         
+
+ Vector   59  Occ=2.000000D+00  E=-4.981162D-01  Symmetry=eu
+              MO Center=  1.6D-16,  5.9D-16,  3.0D-16, r^2= 7.7D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    47      0.201652  3 Cl pz               128      0.201652  6 Cl pz         
+    50      0.188736  3 Cl pz               131      0.188736  6 Cl pz         
+    46     -0.162962  3 Cl py               127     -0.162962  6 Cl py         
+   100     -0.154090  5 Cl py               181     -0.154090  8 Cl py         
+    45      0.151160  3 Cl px               126      0.151160  6 Cl px         
+
+ Vector   60  Occ=2.000000D+00  E=-4.981162D-01  Symmetry=eu
+              MO Center=  3.4D-15, -5.0D-15, -2.3D-15, r^2= 7.7D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    74     -0.179475  4 Cl pz               155     -0.179475  7 Cl pz         
+    72      0.170320  4 Cl px               101      0.169797  5 Cl pz         
+   153      0.170320  7 Cl px               182      0.169797  8 Cl pz         
+    77     -0.167979  4 Cl pz               158     -0.167979  7 Cl pz         
+   104      0.158922  5 Cl pz               185      0.158922  8 Cl pz         
+
+ Vector   61  Occ=2.000000D+00  E=-4.832270D-01  Symmetry=eg
+              MO Center= -6.8D-16, -6.2D-15,  1.8D-15, r^2= 7.8D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+   101      0.263310  5 Cl pz               182     -0.263310  8 Cl pz         
+   104      0.219337  5 Cl pz               185     -0.219337  8 Cl pz         
+   100      0.173466  5 Cl py               181     -0.173466  8 Cl py         
+    46      0.155012  3 Cl py               127     -0.155012  6 Cl py         
+    74     -0.154097  4 Cl pz               155      0.154097  7 Cl pz         
+
+ Vector   62  Occ=2.000000D+00  E=-4.832270D-01  Symmetry=eg
+              MO Center= -6.7D-15, -1.4D-15,  6.6D-15, r^2= 7.8D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    47      0.240990  3 Cl pz               128     -0.240990  6 Cl pz         
+    74     -0.215076  4 Cl pz               155      0.215076  7 Cl pz         
+    50      0.200745  3 Cl pz               131     -0.200745  6 Cl pz         
+    77     -0.179158  4 Cl pz               158      0.179158  7 Cl pz         
+    72      0.168612  4 Cl px               153     -0.168612  7 Cl px         
+
+ Vector   63  Occ=2.000000D+00  E=-4.758492D-01  Symmetry=a1u
+              MO Center=  1.2D-15,  2.1D-16,  1.7D-17, r^2= 7.9D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    73      0.246394  4 Cl py                99      0.246394  5 Cl px         
+   154      0.246394  7 Cl py               180      0.246394  8 Cl px         
+    76      0.205354  4 Cl py               102      0.205354  5 Cl px         
+   157      0.205354  7 Cl py               183      0.205354  8 Cl px         
+    45     -0.180373  3 Cl px                46     -0.180373  3 Cl py         
+
+ Vector   64  Occ=2.000000D+00  E=-4.713225D-01  Symmetry=a2g
+              MO Center=  4.7D-16, -2.9D-16,  4.9D-17, r^2= 8.0D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    73      0.248794  4 Cl py                99      0.248794  5 Cl px         
+   154     -0.248794  7 Cl py               180     -0.248794  8 Cl px         
+    76      0.206301  4 Cl py               102      0.206301  5 Cl px         
+   157     -0.206301  7 Cl py               183     -0.206301  8 Cl px         
+    45     -0.182130  3 Cl px                46     -0.182130  3 Cl py         
+
+ Vector   65  Occ=2.000000D+00  E=-4.192673D-01  Symmetry=a1g
+              MO Center=  6.5D-15,  5.4D-15, -3.0D-15, r^2= 5.5D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    10      0.242640  1 Si pz                28     -0.242640  2 Si pz         
+    47      0.192229  3 Cl pz                74      0.192229  4 Cl pz         
+   101      0.192229  5 Cl pz               128     -0.192229  6 Cl pz         
+   155     -0.192229  7 Cl pz               182     -0.192229  8 Cl pz         
+    50      0.171527  3 Cl pz                77      0.171527  4 Cl pz         
+
+ Vector   66  Occ=0.000000D+00  E= 7.854072D-02  Symmetry=eu
+              MO Center= -8.2D-16, -5.6D-16, -6.6D-16, r^2= 2.1D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    78     -0.911041  4 Cl px               159     -0.911041  7 Cl px         
+    68      0.873543  4 Cl s                149     -0.873543  7 Cl s          
+    41     -0.730753  3 Cl s                122      0.730753  6 Cl s          
+    11     -0.687120  1 Si px                29     -0.687120  2 Si px         
+    51     -0.666581  3 Cl px               132     -0.666581  6 Cl px         
+
+ Vector   67  Occ=0.000000D+00  E= 7.854072D-02  Symmetry=eu
+              MO Center=  7.1D-16,  1.2D-15,  4.5D-16, r^2= 2.1D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+   106      0.949088  5 Cl py               187      0.949088  8 Cl py         
+    95      0.926241  5 Cl s                176     -0.926241  8 Cl s          
+    12      0.687120  1 Si py                30      0.687120  2 Si py         
+    52      0.590487  3 Cl py               133      0.590487  6 Cl py         
+    41     -0.586780  3 Cl s                122      0.586780  6 Cl s          
+
+ Vector   68  Occ=0.000000D+00  E= 8.148251D-02  Symmetry=a2u
+              MO Center=  8.0D-15,  5.9D-17,  1.1D-15, r^2= 2.3D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     4      1.382986  1 Si s                 22     -1.382986  2 Si s          
+    53     -0.514882  3 Cl pz                80     -0.514882  4 Cl pz         
+   107     -0.514882  5 Cl pz               134     -0.514882  6 Cl pz         
+   161     -0.514882  7 Cl pz               188     -0.514882  8 Cl pz         
+    78     -0.343031  4 Cl px               106      0.343031  5 Cl py         
+
+ Vector   69  Occ=0.000000D+00  E= 8.726074D-02  Symmetry=a1g
+              MO Center=  1.4D-15,  1.3D-14, -3.4D-14, r^2= 2.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      0.433723  3 Cl s                 68      0.433723  4 Cl s          
+    95      0.433723  5 Cl s                122      0.433723  6 Cl s          
+   149      0.433723  7 Cl s                176      0.433723  8 Cl s          
+    78      0.333227  4 Cl px               106     -0.333227  5 Cl py         
+   159     -0.333227  7 Cl px               187      0.333227  8 Cl py         
+
+ Vector   70  Occ=0.000000D+00  E= 1.056947D-01  Symmetry=eg
+              MO Center= -8.2D-15,  1.1D-14,  6.2D-15, r^2= 2.7D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      1.175623  3 Cl s                122      1.175623  6 Cl s          
+    51      0.855111  3 Cl px                52     -0.855212  3 Cl py         
+   132     -0.855111  6 Cl px               133      0.855212  6 Cl py         
+    95     -0.598289  5 Cl s                106     -0.596053  5 Cl py         
+   176     -0.598289  8 Cl s                187      0.596053  8 Cl py         
+
+ Vector   71  Occ=0.000000D+00  E= 1.056947D-01  Symmetry=eg
+              MO Center=  3.4D-15,  2.2D-15,  3.4D-16, r^2= 2.7D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68      1.024168  4 Cl s                149      1.024168  7 Cl s          
+    78     -1.016791  4 Cl px                95     -1.012070  5 Cl s          
+   159      1.016791  7 Cl px               176     -1.012070  8 Cl s          
+   106     -1.004736  5 Cl py               187      1.004736  8 Cl py         
+    11      0.557369  1 Si px                29     -0.557369  2 Si px         
+
+ Vector   72  Occ=0.000000D+00  E= 1.126507D-01  Symmetry=eu
+              MO Center= -1.2D-13, -1.6D-13, -1.5D-13, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    95      0.621379  5 Cl s                176     -0.621379  8 Cl s          
+    52      0.437389  3 Cl py                79      0.437915  4 Cl py         
+   106      0.436699  5 Cl py               133      0.437389  6 Cl py         
+   160      0.437915  7 Cl py               187      0.436699  8 Cl py         
+    41     -0.411015  3 Cl s                122      0.411015  6 Cl s          
+
+ Vector   73  Occ=0.000000D+00  E= 1.126507D-01  Symmetry=eu
+              MO Center= -4.0D-14, -4.5D-14,  4.2D-14, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68      0.596053  4 Cl s                149     -0.596053  7 Cl s          
+    41     -0.480207  3 Cl s                122      0.480207  6 Cl s          
+    51     -0.437280  3 Cl px                78     -0.436754  4 Cl px         
+   105     -0.437969  5 Cl px               132     -0.437280  6 Cl px         
+   159     -0.436754  7 Cl px               186     -0.437969  8 Cl px         
+
+ Vector   74  Occ=0.000000D+00  E= 1.277139D-01  Symmetry=a2u
+              MO Center=  2.7D-14, -3.3D-14, -2.4D-15, r^2= 1.6D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    13      0.803922  1 Si pz                31      0.803922  2 Si pz         
+     4     -0.728638  1 Si s                 22      0.728638  2 Si s          
+    78      0.358762  4 Cl px               106     -0.358762  5 Cl py         
+   159      0.358762  7 Cl px               187     -0.358762  8 Cl py         
+    53     -0.290566  3 Cl pz                80     -0.290566  4 Cl pz         
+
+ Vector   75  Occ=0.000000D+00  E= 1.292407D-01  Symmetry=a1g
+              MO Center= -2.4D-15, -3.6D-15,  1.3D-14, r^2= 1.8D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     4      1.676878  1 Si s                 22      1.676878  2 Si s          
+    13     -0.731020  1 Si pz                31      0.731020  2 Si pz         
+    41     -0.494892  3 Cl s                 68     -0.494892  4 Cl s          
+    95     -0.494892  5 Cl s                122     -0.494892  6 Cl s          
+   149     -0.494892  7 Cl s                176     -0.494892  8 Cl s          
+
+ Vector   76  Occ=0.000000D+00  E= 1.365629D-01  Symmetry=eg
+              MO Center= -1.2D-14, -1.7D-14,  2.0D-14, r^2= 1.9D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    12      0.852710  1 Si py                30     -0.852710  2 Si py         
+    11      0.469932  1 Si px                29     -0.469932  2 Si px         
+    51      0.436592  3 Cl px               132     -0.436592  6 Cl px         
+    79      0.400573  4 Cl py               160     -0.400573  7 Cl py         
+    52      0.387977  3 Cl py               133     -0.387977  6 Cl py         
+
+ Vector   77  Occ=0.000000D+00  E= 1.365629D-01  Symmetry=eg
+              MO Center=  2.2D-14,  3.7D-14, -2.3D-14, r^2= 1.9D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    11      0.852710  1 Si px                29     -0.852710  2 Si px         
+   105      0.576899  5 Cl px               186     -0.576899  8 Cl px         
+    12     -0.469932  1 Si py                30      0.469932  2 Si py         
+    79     -0.429320  4 Cl py               160      0.429320  7 Cl py         
+    41     -0.327956  3 Cl s                122     -0.327956  6 Cl s          
+
+ Vector   78  Occ=0.000000D+00  E= 1.576671D-01  Symmetry=a1g
+              MO Center=  2.8D-15,  2.4D-15, -1.1D-14, r^2= 1.3D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     4      1.286531  1 Si s                 22      1.286531  2 Si s          
+    53      0.358855  3 Cl pz                80      0.358855  4 Cl pz         
+   107      0.358855  5 Cl pz               134     -0.358855  6 Cl pz         
+   161     -0.358855  7 Cl pz               188     -0.358855  8 Cl pz         
+    41     -0.325528  3 Cl s                 68     -0.325528  4 Cl s          
+
+ Vector   79  Occ=0.000000D+00  E= 1.610293D-01  Symmetry=eu
+              MO Center= -6.7D-15, -4.4D-15, -1.5D-15, r^2= 1.9D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68      0.797062  4 Cl s                149     -0.797062  7 Cl s          
+    80     -0.783878  4 Cl pz               161     -0.783878  7 Cl pz         
+    11     -0.674598  1 Si px                29     -0.674598  2 Si px         
+    78     -0.585705  4 Cl px               159     -0.585705  7 Cl px         
+    95     -0.517681  5 Cl s                176      0.517681  8 Cl s          
+
+ Vector   80  Occ=0.000000D+00  E= 1.610293D-01  Symmetry=eu
+              MO Center= -3.9D-14, -5.9D-14, -7.4D-15, r^2= 1.9D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      0.759067  3 Cl s                122     -0.759067  6 Cl s          
+    53     -0.746512  3 Cl pz               134     -0.746512  6 Cl pz         
+    12     -0.674598  1 Si py                30     -0.674598  2 Si py         
+    95     -0.621485  5 Cl s                176      0.621485  8 Cl s          
+   107      0.611205  5 Cl pz               188      0.611205  8 Cl pz         
+
+ Vector   81  Occ=0.000000D+00  E= 1.656760D-01  Symmetry=a2u
+              MO Center=  1.5D-13, -1.8D-13,  3.3D-16, r^2= 7.8D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    13      1.700262  1 Si pz                31      1.700262  2 Si pz         
+     4      0.810534  1 Si s                 22     -0.810534  2 Si s          
+    78      0.304763  4 Cl px               106     -0.304763  5 Cl py         
+   159      0.304763  7 Cl px               187     -0.304763  8 Cl py         
+    10      0.232700  1 Si pz                28      0.232700  2 Si pz         
+
+ Vector   82  Occ=0.000000D+00  E= 1.718272D-01  Symmetry=eu
+              MO Center=  2.3D-15, -2.1D-15,  9.4D-16, r^2= 2.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    53      0.571877  3 Cl pz               134      0.571877  6 Cl pz         
+   105     -0.507613  5 Cl px               186     -0.507613  8 Cl px         
+    79      0.503019  4 Cl py               160      0.503019  7 Cl py         
+    52     -0.475237  3 Cl py               133     -0.475237  6 Cl py         
+    51      0.457988  3 Cl px               132      0.457988  6 Cl px         
+
+ Vector   83  Occ=0.000000D+00  E= 1.718272D-01  Symmetry=eu
+              MO Center= -2.3D-14,  2.4D-14, -1.8D-14, r^2= 2.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+   106      0.621980  5 Cl py               187      0.621980  8 Cl py         
+    78      0.611960  4 Cl px               159      0.611960  7 Cl px         
+   107      0.502208  5 Cl pz               188      0.502208  8 Cl pz         
+    80     -0.488312  4 Cl pz               161     -0.488312  7 Cl pz         
+    51     -0.366296  3 Cl px               132     -0.366296  6 Cl px         
+
+ Vector   84  Occ=0.000000D+00  E= 1.730821D-01  Symmetry=a1u
+              MO Center=  8.7D-16,  4.4D-17, -2.6D-16, r^2= 2.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    79      0.868707  4 Cl py               105      0.868707  5 Cl px         
+   160      0.868707  7 Cl py               186      0.868707  8 Cl px         
+    51     -0.635937  3 Cl px                52     -0.635937  3 Cl py         
+   132     -0.635937  6 Cl px               133     -0.635937  6 Cl py         
+    78     -0.232769  4 Cl px               106     -0.232769  5 Cl py         
+
+ Vector   85  Occ=0.000000D+00  E= 1.979792D-01  Symmetry=a1g
+              MO Center= -2.4D-14, -5.1D-14, -1.2D-13, r^2= 1.2D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    13      0.412471  1 Si pz                31     -0.412471  2 Si pz         
+    78      0.389966  4 Cl px               106     -0.389966  5 Cl py         
+   159     -0.389966  7 Cl px               187      0.389966  8 Cl py         
+     4      0.365282  1 Si s                 22      0.365282  2 Si s          
+    51     -0.285475  3 Cl px                52      0.285475  3 Cl py         
+
+ Vector   86  Occ=0.000000D+00  E= 2.001897D-01  Symmetry=eg
+              MO Center= -7.3D-15,  8.5D-15, -5.7D-14, r^2= 2.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    53      1.114130  3 Cl pz               134     -1.114130  6 Cl pz         
+    80     -1.012725  4 Cl pz               161      1.012725  7 Cl pz         
+    78      0.642225  4 Cl px               159     -0.642225  7 Cl px         
+    51      0.631826  3 Cl px               132     -0.631826  6 Cl px         
+   105      0.587365  5 Cl px               186     -0.587365  8 Cl px         
+
+ Vector   87  Occ=0.000000D+00  E= 2.001897D-01  Symmetry=eg
+              MO Center=  2.1D-14, -4.3D-14, -1.1D-14, r^2= 2.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+   107      1.227940  5 Cl pz               188     -1.227940  8 Cl pz         
+    80     -0.701789  4 Cl pz               161      0.701789  7 Cl pz         
+   106      0.653579  5 Cl py               187     -0.653579  8 Cl py         
+    52      0.609118  3 Cl py               133     -0.609118  6 Cl py         
+    79      0.598719  4 Cl py               160     -0.598719  7 Cl py         
+
+ Vector   88  Occ=0.000000D+00  E= 2.039832D-01  Symmetry=a2u
+              MO Center= -1.9D-15, -2.1D-13,  1.2D-13, r^2= 1.5D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     4      0.962367  1 Si s                 22     -0.962367  2 Si s          
+    78     -0.572732  4 Cl px               106      0.572732  5 Cl py         
+   159     -0.572732  7 Cl px               187      0.572732  8 Cl py         
+    41      0.507293  3 Cl s                 68      0.507293  4 Cl s          
+    95      0.507293  5 Cl s                122     -0.507293  6 Cl s          
+
+ Vector   89  Occ=0.000000D+00  E= 2.050792D-01  Symmetry=a2g
+              MO Center=  6.4D-15, -1.6D-14, -2.5D-15, r^2= 2.3D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    79      1.233267  4 Cl py               105      1.233267  5 Cl px         
+   160     -1.233267  7 Cl py               186     -1.233267  8 Cl px         
+    51     -0.902814  3 Cl px                52     -0.902814  3 Cl py         
+   132      0.902814  6 Cl px               133      0.902814  6 Cl py         
+    78     -0.330453  4 Cl px               106     -0.330453  5 Cl py         
+
+ Vector   90  Occ=0.000000D+00  E= 2.231567D-01  Symmetry=eg
+              MO Center= -1.2D-14,  5.1D-15,  1.2D-14, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68      1.360287  4 Cl s                149      1.360287  7 Cl s          
+    11      1.225625  1 Si px                29     -1.225625  2 Si px         
+    95     -1.151772  5 Cl s                176     -1.151772  8 Cl s          
+    12      0.917508  1 Si py                30     -0.917508  2 Si py         
+    78     -0.495979  4 Cl px               159      0.495979  7 Cl px         
+
+ Vector   91  Occ=0.000000D+00  E= 2.231567D-01  Symmetry=eg
+              MO Center=  3.0D-13, -1.9D-13,  7.0D-14, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      1.450338  3 Cl s                122      1.450338  6 Cl s          
+    12      1.225625  1 Si py                30     -1.225625  2 Si py         
+    11     -0.917508  1 Si px                29      0.917508  2 Si px         
+    95     -0.905748  5 Cl s                176     -0.905748  8 Cl s          
+    68     -0.544590  4 Cl s                149     -0.544590  7 Cl s          
+
+ Vector   92  Occ=0.000000D+00  E= 2.388146D-01  Symmetry=a2u
+              MO Center= -5.4D-15,  6.9D-15,  1.4D-14, r^2= 1.4D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     4      1.914275  1 Si s                 22     -1.914275  2 Si s          
+    41      1.485272  3 Cl s                 68      1.485272  4 Cl s          
+    95      1.485272  5 Cl s                122     -1.485272  6 Cl s          
+   149     -1.485272  7 Cl s                176     -1.485272  8 Cl s          
+    13     -1.013863  1 Si pz                31     -1.013863  2 Si pz         
+
+ Vector   93  Occ=0.000000D+00  E= 2.646132D-01  Symmetry=eg
+              MO Center= -3.9D-13,  2.1D-12, -8.4D-13, r^2= 1.4D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    95      2.605231  5 Cl s                176      2.605231  8 Cl s          
+    41     -2.282130  3 Cl s                122     -2.282130  6 Cl s          
+    12     -1.212249  1 Si py                30      1.212249  2 Si py         
+   106      0.959162  5 Cl py               187     -0.959162  8 Cl py         
+    51     -0.615967  3 Cl px                52      0.614423  3 Cl py         
+
+ Vector   94  Occ=0.000000D+00  E= 2.646132D-01  Symmetry=eg
+              MO Center=  7.1D-13,  9.6D-15,  6.0D-13, r^2= 1.4D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68      2.821719  4 Cl s                149      2.821719  7 Cl s          
+    41     -1.690674  3 Cl s                122     -1.690674  6 Cl s          
+    11      1.212249  1 Si px                29     -1.212249  2 Si px         
+    95     -1.131045  5 Cl s                176     -1.131045  8 Cl s          
+    78     -1.039016  4 Cl px               159      1.039016  7 Cl px         
+
+ Vector   95  Occ=0.000000D+00  E= 2.825096D-01  Symmetry=eu
+              MO Center= -3.5D-13, -4.8D-13, -2.1D-13, r^2= 1.5D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    95     -2.804625  5 Cl s                176      2.804625  8 Cl s          
+    68      2.768869  4 Cl s                149     -2.768869  7 Cl s          
+    12     -0.987333  1 Si py                30     -0.987333  2 Si py         
+    11     -0.965633  1 Si px                29     -0.965633  2 Si px         
+   106     -0.856063  5 Cl py               187     -0.856063  8 Cl py         
+
+ Vector   96  Occ=0.000000D+00  E= 2.825096D-01  Symmetry=eu
+              MO Center= -9.3D-15,  4.1D-14,  7.4D-14, r^2= 1.5D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      3.217858  3 Cl s                122     -3.217858  6 Cl s          
+    68     -1.639894  4 Cl s                149      1.639894  7 Cl s          
+    95     -1.577964  5 Cl s                176      1.577964  8 Cl s          
+    11      0.987333  1 Si px                29      0.987333  2 Si px         
+    12     -0.965633  1 Si py                30     -0.965633  2 Si py         
+
+ Vector   97  Occ=0.000000D+00  E= 3.264006D-01  Symmetry=eu
+              MO Center=  5.4D-14, -8.4D-14,  2.8D-13, r^2= 8.3D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      0.495524  3 Cl s                122     -0.495524  6 Cl s          
+    68     -0.475618  4 Cl s                149      0.475618  7 Cl s          
+   105      0.254742  5 Cl px               186      0.254742  8 Cl px         
+   113      0.224894  5 Cl d -2             194     -0.224894  8 Cl d -2       
+     8      0.223394  1 Si px                26      0.223394  2 Si px         
+
+ Vector   98  Occ=0.000000D+00  E= 3.264006D-01  Symmetry=eu
+              MO Center=  2.5D-13,  1.4D-13,  2.6D-13, r^2= 8.3D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    95      0.560689  5 Cl s                176     -0.560689  8 Cl s          
+    68     -0.297583  4 Cl s                149      0.297583  7 Cl s          
+    41     -0.263106  3 Cl s                122      0.263106  6 Cl s          
+    94     -0.247544  5 Cl s                175      0.247544  8 Cl s          
+    63      0.228603  3 Cl d  2             144     -0.228603  6 Cl d  2       
+
+ Vector   99  Occ=0.000000D+00  E= 3.653868D-01  Symmetry=a1g
+              MO Center= -1.9D-13,  5.1D-15,  1.6D-14, r^2= 9.6D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+     4      1.920291  1 Si s                 22      1.920291  2 Si s          
+    13     -0.682313  1 Si pz                31      0.682313  2 Si pz         
+     3     -0.476957  1 Si s                 21     -0.476957  2 Si s          
+    41     -0.341316  3 Cl s                 68     -0.341316  4 Cl s          
+    95     -0.341316  5 Cl s                122     -0.341316  6 Cl s          
+
+ Vector  100  Occ=0.000000D+00  E= 3.917741D-01  Symmetry=a2u
+              MO Center= -5.0D-14, -2.0D-14,  7.3D-15, r^2= 1.1D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    13      2.610862  1 Si pz                31      2.610862  2 Si pz         
+     4      2.047630  1 Si s                 22     -2.047630  2 Si s          
+    10     -0.479532  1 Si pz                28     -0.479532  2 Si pz         
+    53     -0.389171  3 Cl pz                80     -0.389171  4 Cl pz         
+   107     -0.389171  5 Cl pz               134     -0.389171  6 Cl pz         
+
+ Vector  101  Occ=0.000000D+00  E= 4.005736D-01  Symmetry=eg
+              MO Center= -5.9D-14,  3.8D-12, -3.8D-13, r^2= 9.4D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    12      1.672944  1 Si py                30     -1.672944  2 Si py         
+    95     -1.184059  5 Cl s                176     -1.184059  8 Cl s          
+    41      0.909619  3 Cl s                122      0.909619  6 Cl s          
+   106     -0.444375  5 Cl py               187      0.444375  8 Cl py         
+     9     -0.408705  1 Si py                27      0.408705  2 Si py         
+
+ Vector  102  Occ=0.000000D+00  E= 4.005736D-01  Symmetry=eg
+              MO Center=  1.3D-13, -5.6D-14,  1.2D-13, r^2= 9.4D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    11      1.672944  1 Si px                29     -1.672944  2 Si px         
+    68      1.208786  4 Cl s                149      1.208786  7 Cl s          
+    41     -0.842065  3 Cl s                122     -0.842065  6 Cl s          
+    78     -0.456368  4 Cl px               159      0.456368  7 Cl px         
+     8     -0.408705  1 Si px                26      0.408705  2 Si px         
+
+ Vector  103  Occ=0.000000D+00  E= 4.355287D-01  Symmetry=eu
+              MO Center= -4.1D-14,  3.6D-13, -1.2D-13, r^2= 1.3D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    95      2.376073  5 Cl s                176     -2.376073  8 Cl s          
+    12      1.824599  1 Si py                30      1.824599  2 Si py         
+    41     -1.745394  3 Cl s                122      1.745394  6 Cl s          
+   106      0.964799  5 Cl py               187      0.964799  8 Cl py         
+    68     -0.630679  4 Cl s                149      0.630679  7 Cl s          
+
+ Vector  104  Occ=0.000000D+00  E= 4.355287D-01  Symmetry=eu
+              MO Center=  2.4D-13, -1.1D-13, -1.8D-13, r^2= 1.3D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68      2.379530  4 Cl s                149     -2.379530  7 Cl s          
+    11     -1.824599  1 Si px                29     -1.824599  2 Si px         
+    41     -1.735949  3 Cl s                122      1.735949  6 Cl s          
+    78     -0.965963  4 Cl px               159     -0.965963  7 Cl px         
+    95     -0.643581  5 Cl s                176      0.643581  8 Cl s          
+
+ Vector  105  Occ=0.000000D+00  E= 4.415834D-01  Symmetry=a1g
+              MO Center=  1.4D-13,  1.6D-13, -2.2D-13, r^2= 7.9D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    10      0.379054  1 Si pz                28     -0.379054  2 Si pz         
+    13     -0.305483  1 Si pz                31      0.305483  2 Si pz         
+     4      0.278116  1 Si s                 22      0.278116  2 Si s          
+    61     -0.213148  3 Cl d  0              88     -0.213148  4 Cl d  0       
+   115     -0.213148  5 Cl d  0             142     -0.213148  6 Cl d  0       
+
+ Vector  106  Occ=0.000000D+00  E= 4.518361D-01  Symmetry=eg
+              MO Center= -8.5D-13,  1.1D-12,  1.7D-13, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      1.150601  3 Cl s                122      1.150601  6 Cl s          
+    40     -0.685122  3 Cl s                121     -0.685122  6 Cl s          
+    68     -0.627739  4 Cl s                149     -0.627739  7 Cl s          
+    95     -0.522862  5 Cl s                176     -0.522862  8 Cl s          
+    53     -0.467370  3 Cl pz               134      0.467370  6 Cl pz         
+
+ Vector  107  Occ=0.000000D+00  E= 4.518361D-01  Symmetry=eg
+              MO Center=  1.3D-12,  1.1D-12, -2.3D-13, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    95     -1.026725  5 Cl s                176     -1.026725  8 Cl s          
+    68      0.966175  4 Cl s                149      0.966175  7 Cl s          
+    94      0.611361  5 Cl s                175      0.611361  8 Cl s          
+    67     -0.575306  4 Cl s                148     -0.575306  7 Cl s          
+   107      0.417052  5 Cl pz               188     -0.417052  8 Cl pz         
+
+ Vector  108  Occ=0.000000D+00  E= 4.544108D-01  Symmetry=a1u
+              MO Center=  6.2D-14,  3.8D-13, -5.6D-13, r^2= 9.3D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    87      0.366738  4 Cl d -1             116     -0.366738  5 Cl d  1       
+   168     -0.366738  7 Cl d -1             197      0.366738  8 Cl d  1       
+    60     -0.268471  3 Cl d -1              62      0.268471  3 Cl d  1       
+   141      0.268471  6 Cl d -1             143     -0.268471  6 Cl d  1       
+
+ Vector  109  Occ=0.000000D+00  E= 4.833769D-01  Symmetry=eu
+              MO Center= -5.5D-13, -3.1D-13, -8.6D-13, r^2= 9.6D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    95      0.893010  5 Cl s                176     -0.893010  8 Cl s          
+    12      0.740261  1 Si py                30      0.740261  2 Si py         
+    41     -0.510051  3 Cl s                122      0.510051  6 Cl s          
+    68     -0.382959  4 Cl s                149      0.382959  7 Cl s          
+   106      0.368275  5 Cl py               187      0.368275  8 Cl py         
+
+ Vector  110  Occ=0.000000D+00  E= 4.833769D-01  Symmetry=eu
+              MO Center=  4.5D-13,  1.9D-12,  2.8D-13, r^2= 9.6D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68     -0.810057  4 Cl s                149      0.810057  7 Cl s          
+    11      0.740261  1 Si px                29      0.740261  2 Si px         
+    41      0.736681  3 Cl s                122     -0.736681  6 Cl s          
+    78      0.333142  4 Cl px               159      0.333142  7 Cl px         
+   116     -0.307365  5 Cl d  1             197      0.307365  8 Cl d  1       
+
+ Vector  111  Occ=0.000000D+00  E= 4.986679D-01  Symmetry=eg
+              MO Center= -5.8D-13,  9.5D-13, -5.7D-12, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    41      1.487737  3 Cl s                122      1.487737  6 Cl s          
+    12      1.158836  1 Si py                30     -1.158836  2 Si py         
+    95     -0.917212  5 Cl s                176     -0.917212  8 Cl s          
+    11     -0.883994  1 Si px                29      0.883994  2 Si px         
+    68     -0.570524  4 Cl s                149     -0.570524  7 Cl s          
+
+ Vector  112  Occ=0.000000D+00  E= 4.986679D-01  Symmetry=eg
+              MO Center=  9.0D-13,  1.5D-12, -5.5D-12, r^2= 1.0D+01
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    68      1.388498  4 Cl s                149      1.388498  7 Cl s          
+    95     -1.188338  5 Cl s                176     -1.188338  8 Cl s          
+    11      1.158836  1 Si px                29     -1.158836  2 Si px         
+    12      0.883994  1 Si py                30     -0.883994  2 Si py         
+    78     -0.506684  4 Cl px               159      0.506684  7 Cl px         
+
+ Vector  113  Occ=0.000000D+00  E= 5.103020D-01  Symmetry=eu
+              MO Center=  1.4D-13,  4.5D-13,  5.1D-12, r^2= 9.6D+00
+   Bfn.  Coefficient  Atom+Function         Bfn.  Coefficient  Atom+Function  
+  ----- ------------  ---------------      ----- ------------  ---------------
+    87      0.311405  4 Cl d -1             168     -0.311405  7 Cl d -1       
+    59      0.287994  3 Cl d -2             140     -0.287994  6 Cl d -2       
+   116      0.274073  5 Cl d  1             197     -0.274073  8 Cl d  1       
+    53     -0.236728  3 Cl pz               134     -0.236728  6 Cl pz         
+   117     -0.180117  5 Cl d  2             198      0.180117  8 Cl d  2       
+
+
+------------------------------------------------------------
+EAF file 0: "./si2cl6.aoints.0" size=252182528 bytes
+------------------------------------------------------------
+               write      read    awrite     aread      wait
+               -----      ----    ------     -----      ----
+     calls:      481        24         0     11520     11520
+   data(b): 2.52e+08  1.26e+07  0.00e+00  6.04e+09
+   time(s): 0.00e+00  0.00e+00  0.00e+00  0.00e+00  0.00e+00
+rate(mb/s): 0.00e+00  0.00e+00
+------------------------------------------------------------
+
+
+ center of mass
+ --------------
+ x =   0.00000000 y =   0.00000000 z =   0.00000000
+
+ moments of inertia (a.u.)
+ ------------------
+        4111.966611256645           0.000000000000           0.000000000000
+           0.000000000000        4111.966611256645           0.000000000000
+           0.000000000000           0.000000000000        2642.376419499827
+
+  Mulliken analysis of the total density
+  --------------------------------------
+
+    Atom       Charge   Shell Charges
+ -----------   ------   -------------------------------------------------------
+    1 Si  14    13.02   2.00  2.02  0.79 -0.04  6.00  1.37  0.27  0.60
+    2 Si  14    13.02   2.00  2.02  0.79 -0.04  6.00  1.37  0.27  0.60
+    3 Cl  17    17.33   2.00  2.02  0.92  1.00  0.04  6.00  3.07  2.22  0.03  0.02  0.02
+    4 Cl  17    17.33   2.00  2.02  0.92  1.00  0.04  6.00  3.07  2.22  0.03  0.02  0.02
+    5 Cl  17    17.33   2.00  2.02  0.92  1.00  0.04  6.00  3.07  2.22  0.03  0.02  0.02
+    6 Cl  17    17.33   2.00  2.02  0.92  1.00  0.04  6.00  3.07  2.22  0.03  0.02  0.02
+    7 Cl  17    17.33   2.00  2.02  0.92  1.00  0.04  6.00  3.07  2.22  0.03  0.02  0.02
+    8 Cl  17    17.33   2.00  2.02  0.92  1.00  0.04  6.00  3.07  2.22  0.03  0.02  0.02
+
+       Multipole analysis of the density wrt the origin
+       ------------------------------------------------
+
+     L   x y z        total         open         nuclear
+     -   - - -        -----         ----         -------
+     0   0 0 0      0.000000      0.000000    130.000000
+
+     1   1 0 0      0.000000      0.000000      0.000000
+     1   0 1 0      0.000000      0.000000      0.000000
+     1   0 0 1      0.000000      0.000000      0.000000
+
+     2   2 0 0    -76.275048      0.000000    642.291627
+     2   1 1 0      0.000000      0.000000      0.000000
+     2   1 0 1      0.000000      0.000000      0.000000
+     2   0 2 0    -76.275048      0.000000    642.291627
+     2   0 1 1      0.000000      0.000000      0.000000
+     2   0 0 2    -77.025094      0.000000   1360.624605
+
+
+ Parallel integral file used     481 records with       0 large values
+
+
+ Task  times  cpu:       68.6s     wall:       70.6s
+ Summary of allocated global arrays
+-----------------------------------
+  No active global arrays
+
+
+
+                         GA Statistics for process    0
+                         ------------------------------
+
+       create   destroy   get      put      acc     scatter   gather  read&inc
+calls:  610      610     4.80e+04 2.32e+04 3.80e+04    0        0     2395     
+number of processes/call 1.00e+00 1.00e+00 1.00e+00 0.00e+00 0.00e+00
+bytes total:             1.99e+08 1.19e+08 1.60e+08 0.00e+00 0.00e+00 1.92e+04
+bytes remote:            0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00
+Max memory consumed for GA by this process: 4482528 bytes
+MA_summarize_allocated_blocks: starting scan ...
+MA_summarize_allocated_blocks: scan completed: 0 heap blocks, 0 stack blocks
+MA usage statistics:
+
+	allocation statistics:
+					      heap	     stack
+					      ----	     -----
+	current number of blocks	         0	         0
+	maximum number of blocks	        14	        16
+	current total bytes		         0	         0
+	maximum total bytes		     80136	  22514088
+	maximum total K-bytes		        81	     22515
+	maximum total M-bytes		         1	        23
+
+
+                                NWChem Input Module
+                                -------------------
+
+
+
+
+
+                                     CITATION
+                                     --------
+                Please cite the following reference when publishing
+                           results obtained with NWChem:
+
+                 M. Valiev, E.J. Bylaska, N. Govind, K. Kowalski,
+              T.P. Straatsma, H.J.J. van Dam, D. Wang, J. Nieplocha,
+                        E. Apra, T.L. Windus, W.A. de Jong
+                 "NWChem: a comprehensive and scalable open-source
+                  solution for large scale molecular simulations"
+                      Comput. Phys. Commun. 181, 1477 (2010)
+                           doi:10.1016/j.cpc.2010.04.018
+
+                              AUTHORS & CONTRIBUTORS
+                              ----------------------
+          E. Apra, E. J. Bylaska, W. A. de Jong, N. Govind, K. Kowalski,
+       T. P. Straatsma, M. Valiev, H. J. J. van Dam, D. Wang, T. L. Windus,
+    J. Hammond, J. Autschbach, K. Bhaskaran-Nair, J. Brabec, K. Lopata, W. Ma,
+       M. Klemm, O. Villa, F. Aquino, S. Hirata, M. T. Hackler, T. Risthaus,
+       M. Malagoli, A. Marenich, A. Otero-de-la-Roza, J. Mullin, P. Nichols,
+      R. Peverati, J. Pittner, Y. Zhao, P.-D. Fan, A. Fonari, R. J. Harrison,
+      M. Dupuis, D. Silverstein, D. M. A. Smith, J. Nieplocha, V. Tipparaju,
+    M. Krishnan, B. E. Van Kuiken, A. Vazquez-Mayagoitia, L. Jensen, M. Swart,
+      Q. Wu, T. Van Voorhis, A. A. Auer, M. Nooijen, L. D. Crosby, E. Brown,
+      G. Cisneros, G. I. Fann, H. Fruchtl, J. Garza, K. Hirao, R. A. Kendall,
+      J. A. Nichols, K. Tsemekhman, K. Wolinski, J. Anchell, D. E. Bernholdt,
+      P. Borowski, T. Clark, D. Clerc, H. Dachsel, M. J. O. Deegan, K. Dyall,
+    D. Elwood, E. Glendening, M. Gutowski, A. C. Hess, J. Jaffe, B. G. Johnson,
+     J. Ju, R. Kobayashi, R. Kutteh, Z. Lin, R. Littlefield, X. Long, B. Meng,
+      T. Nakajima, S. Niu, L. Pollack, M. Rosing, K. Glaesemann, G. Sandrone,
+      M. Stave, H. Taylor, G. Thomas, J. H. van Lenthe, A. T. Wong, Z. Zhang.
+
+ Total times  cpu:       68.6s     wall:       70.7s

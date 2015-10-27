@@ -1,0 +1,48 @@
+echo
+start prop_h2o
+title h2o
+
+geometry units au nocenter 
+o       .00000000      .00000000      .11786656
+h       .00000000     1.84118838     -.93531364
+h       .00000000    -1.84118838     -.93531364
+end
+
+basis noprint
+  H library sto-3g
+  O library sto-3g
+end
+charge 0
+property
+  mulliken
+  dipole
+  quadrupole
+  octupole
+  esp
+  efield
+  efieldgrad
+  electrondensity
+  shielding
+end
+
+task scf property
+
+charge 1
+dft
+ mult 2
+ xc b3lyp
+ fukui
+ print "Fukui information"
+end
+property
+  mulliken
+  dipole
+  quadrupole
+  octupole
+  esp
+  efield
+  efieldgrad
+  electrondensity
+end
+
+task dft property

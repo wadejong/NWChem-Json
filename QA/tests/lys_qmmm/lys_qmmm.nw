@@ -1,0 +1,46 @@
+Title "QM/MM of Lys monomer"
+
+
+memory total 1000 Mb
+
+start lys
+
+echo
+
+#task shell "cp lys0.rst lys_em.rst"
+prepare
+read lys0.rst
+write lys_em.rst
+end
+
+task prepare
+
+# A basis set must be defined for the QM part 
+
+basis "ao basis" 
+  * library "6-31G*"
+end
+
+
+charge 1.0
+
+dft
+ iterations 100
+end
+
+md
+ system lys_em
+ cutoff 1.9   qmmm 1.0
+end
+
+qmmm
+ eatoms -84
+ link_atoms halogen
+ region qm
+ method bfgs
+ maxiter 5
+end
+
+task qmmm dft optimize ignore
+
+

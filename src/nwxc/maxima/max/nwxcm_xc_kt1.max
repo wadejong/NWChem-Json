@@ -1,0 +1,47 @@
+doi: "10.1063/1.1590634";
+reference: "TW Keal, DJ Tozer, J.Chem.Phys. 119, 3015 (2003) ";
+F000001:   0.0000000000000000E+00;
+F000002(rhoa,rhob):= rhoa+rhob;
+/* comp: F000002(rhoa,rhob).lt.0.1000000000000000E-09
+*/
+/* comp: rhoa.lt.0.1000000000000000E-09
+*/
+F000003(rhoa):= rhoa^(1/3);
+F000004(rhoa):= F000003(rhoa)*rhoa;
+F000005(rhoa):= F000004(rhoa)+0.1000000000000000E+00;
+F000006(rhoa):= 0.1000000000000000E+01/F000005(rhoa);
+F000007(rhoa):= F000006(rhoa)*F000006(rhoa);
+F000008(sigmaaa):= -0.6000000000000000E-02*sigmaaa;
+F000009(rhoa,sigmaaa):= F000008(sigmaaa)*F000006(rhoa);
+F000010(rhoa,sigmaaa):= F000009(rhoa,sigmaaa)*0.1000000000000000E+01;
+F000011(rhoa,sigmaaa):= F000001+F000010(rhoa,sigmaaa);
+/* comp: rhob.lt.0.1000000000000000E-09
+*/
+F000012(rhob):= rhob^(1/3);
+F000013(rhob):= F000012(rhob)*rhob;
+F000014(rhob):= F000013(rhob)+0.1000000000000000E+00;
+F000015(rhob):= 0.1000000000000000E+01/F000014(rhob);
+F000016(rhob):= F000015(rhob)*F000015(rhob);
+F000017(sigmabb):= -0.6000000000000000E-02*sigmabb;
+F000018(rhob,sigmabb):= F000017(sigmabb)*F000015(rhob);
+F000019(rhob,sigmabb):= F000018(rhob,sigmabb)*0.1000000000000000E+01;
+F000020(rhoa,rhob,sigmaaa,sigmabb):= F000011(rhoa,sigmaaa)+F000019(rhob,sigmabb);
+f(zeta,rhoa,rhob,rho,sigmaaa,sigmaab,sigmabb,sigma,taua,taub,tau):=F000020(rhoa,rhob,sigmaaa,sigmabb);
+F000021:   0.0000000000000000E+00;
+F000022(rhoa,rhob):= rhoa+rhob;
+/* comp: F000022(rhoa,rhob).lt.0.1000000000000000E-09
+*/
+/* comp: rhoa.lt.0.1000000000000000E-09
+*/
+F000023(rhoa):= rhoa^(1/3);
+F000024(rhoa):= F000023(rhoa)*rhoa;
+F000025(rhoa):= F000024(rhoa)+0.1000000000000000E+00;
+F000026(rhoa):= 0.1000000000000000E+01/F000025(rhoa);
+F000027(rhoa):= F000026(rhoa)*F000026(rhoa);
+F000028(sigmaaa):= -0.6000000000000000E-02*sigmaaa;
+F000029(rhoa,sigmaaa):= F000028(sigmaaa)*F000026(rhoa);
+F000030(rhoa,sigmaaa):= F000029(rhoa,sigmaaa)*0.1000000000000000E+01;
+F000031(rhoa,sigmaaa):= F000021+F000030(rhoa,sigmaaa);
+/* comp: rhob.lt.0.1000000000000000E-09
+*/
+G(rhoa,sigmaaa,taua,taub):=F000031(rhoa,sigmaaa);

@@ -1,0 +1,10 @@
+C$Id: offl_l_2_scratch.fh 26633 2015-01-01 02:47:26Z edo $
+#ifndef OPENMP_OFFLOAD
+CDIR$ OFFLOAD TARGET(mic:mic_device) 
+     N	 IN(triplesx:length(0) REUSE)  
+     I   IN( k_range_h3b_1,k_range_h2b_1,k_range_h1b_1)
+     I   IN( k_range_p6b_1,k_range_p5b_1,k_range_p4b_1,k_range_p7b_1)
+     R   IN(scratch:length(l_t2sub) REUSE)
+     R   IN(v2sub:length(l_v2sub) REUSE)
+     R   IN(t2sub:length(l_t2sub) REUSE)
+#endif

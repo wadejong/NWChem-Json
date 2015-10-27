@@ -1,0 +1,17 @@
+echo
+memory noverify heap 1 mb stack 128 mb global 24 mb
+
+start nak
+
+md
+ system nak_md
+ equil 0 data 10 step 0.002
+ isotherm
+ isobar
+ cutoff 1.0
+ print step 1 stat 10
+ record rest 0
+ test 10
+end
+
+task md dynamics

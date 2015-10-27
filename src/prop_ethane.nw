@@ -1,0 +1,43 @@
+echo
+start prop_ethane_run
+title ethane
+
+geometry
+ C      0.771060    -0.000000     0.000001
+ C     -0.771060    -0.000000    -0.000001
+ H     -1.156219     0.877740    -0.506761
+ H     -1.156221    -0.000000     1.013529
+ H     -1.156219    -0.877740    -0.506761
+ H      1.156221    -0.000000    -1.013529
+ H      1.156219     0.877740     0.506761
+ H      1.156219    -0.877740     0.506761
+end
+
+basis
+ * library cc-pvdz
+# * library aug-cc-pvtz
+end
+charge 0
+
+task scf energy
+task scf optimize
+task scf freq
+
+property
+ mulliken
+ dipole
+ quadrupole
+ octupole
+ esp
+ efield
+ efieldgrad
+ electrondensity
+ shielding
+end
+
+task scf property
+
+task dft energy
+task dft optimize
+task dft freq
+task dft property

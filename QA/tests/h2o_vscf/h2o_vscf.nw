@@ -1,0 +1,26 @@
+echo
+start vscf_h2o
+
+geometry units au
+  O     0.00000000     0.00000000     0.20578928
+  H    -1.42497864     0.00000000    -0.87779464
+  H     1.42497864     0.00000000    -0.87779464
+end
+
+basis
+  O library 6-31g*
+  H library 6-31g*
+end
+
+vscf
+coupling diagonal
+end
+
+task scf vscf
+
+vscf
+coupling pair
+end
+
+task scf vscf
+

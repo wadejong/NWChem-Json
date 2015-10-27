@@ -1,0 +1,15 @@
+$Id: README 19708 2010-10-29 18:04:21Z d3y133 $
+
+This is a pair of programs that translate between NWChem movecs files
+in the usual binary format and an ASCII form that can be moved to
+another platform and converted back into a binary file for that
+machine.  They are quite simple, and don't do much error checking, but
+they seem to work.
+
+Known to work on Sun and SGI
+Requires NWChem's include files and libnwcutil.a containing the MA
+library.
+
+
+MA_USE_ARMCI_MEM must not be set to anything for this to work:
+unsetenv MA_USE_ARMCI_MEM

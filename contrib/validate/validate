@@ -1,0 +1,80 @@
+#!/bin/bash
+#
+# Validate
+# ========
+#
+# Go through the output of the QA test suite run, and for every test case
+# that failed summarize the differences.
+#
+# Command line arguments:
+#
+# - $0: this script
+# - $1: the name of the log file
+#
+# First we want to know where we are so that we can invoke the scripts we
+# need. The scripts we need live in the same location as this file.
+#
+if [ -f "$0" ] ; then
+   # The first item on the command line is an actual file so it must have
+   # been specified including the path.
+   path="`dirname \"$0\"`"
+else
+   # The first item on the command line is not a file so it must have been
+   # found in PATH.
+   path="`which \"$0\"`"
+   path="`dirname \"$path\"`"
+fi
+if [ ${#VAL_DIFF} -eq 0 ] ; then
+   VAL_DIFF=`which tkdiff`
+fi
+if [ ${#VAL_DIFF} -eq 0 ] ; then
+   VAL_DIFF=`which diff`
+fi
+if [ ${#VAL_DIFF} -eq 0 ] ; then
+   echo "Found no diff program. Giving up..."
+   exit 10
+fi
+export VAL_DIFF
+testlist=`$path/get_tests.bash $1`
+for tcase in $testlist; do
+   if [ -f testoutputs/${tcase}.out.nwparse ] ; then
+      # This is a regular test case that completed.
+      echo -n "Test:" ${tcase}
+      diff testoutputs/${tcase}.ok.out.nwparse testoutputs/${tcase}.out.nwparse > /dev/null
+      stat=$?
+      if [ ${stat} -ne 0 ] ; then
+         echo " ... failed ... diffing ..."
+         ${VAL_DIFF} testoutputs/${tcase}.ok.out.nwparse testoutputs/${tcase}.out.nwparse
+      else
+         echo " ... OK"
+      fi
+   elif [ -f testoutputs/${tcase}.ok.tst ] ; then
+      # This is a molecular dynamics simulation.
+      if [ -f testoutputs/${tcase}.top ] ; then
+         echo -n "Test:" ${tcase}
+         diff testoutputs/${tcase}.ok.tst testoutputs/${tcase}.top > /dev/null
+         stat=$?
+         if [ ${stat} -ne 0 ] ; then
+            echo " ... failed ... diffing ..."
+            ${VAL_DIFF} testoutputs/${tcase}.ok.tst testoutputs/${tcase}.top
+         else
+            echo " ... OK"
+         fi
+      else
+         echo -n "Test:" ${tcase}
+         diff testoutputs/${tcase}.ok.tst testoutputs/${tcase}.tst > /dev/null
+         stat=$?
+         if [ ${stat} -ne 0 ] ; then
+            echo " ... failed ... diffing ..."
+            ${VAL_DIFF} testoutputs/${tcase}.ok.tst testoutputs/${tcase}.tst
+         else
+            echo " ... OK"
+         fi
+      fi
+   else
+      # This is a regular test case that crashed.
+      echo "Test:" ${tcase} " ... failed ... diffing ..."
+      ${VAL_DIFF} testoutputs/${tcase}.ok.out testoutputs/${tcase}.out
+   fi
+done
+echo "... All Done ..."

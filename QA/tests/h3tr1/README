@@ -1,0 +1,4 @@
+$Id: README 19708 2010-10-29 18:04:21Z d3y133 $
+This tests the DIRDYVTST capability.  It is not part of the doqmtests because
+nwparse.pl does not parse anything from the output file.  When the proper
+testing mechanisms are in place, this will be part of the automatic test suite.

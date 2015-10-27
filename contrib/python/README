@@ -1,0 +1,90 @@
+A collection of miscelaneous Python scripts and test cases 
+that have been partially tested.
+
+IMPORTANT:
+ Make sure that the directory containing Xrtdb.py is in your PYTHONPATH
+
+
+Xrtdb.py - A Tkinter based graphical RTDB editor
+     Requires Tkinter support be built into the Python that NWChem
+     is linked against.  On some machines this also requires linking
+     against _tkinter.so which is in the python lib-dynload.
+
+testxrtb.nw
+     Example use of Xrtdb
+
+nwgeom.py - look in the file for (a little) more documentation
+   Defines the procedures
+
+   - coords = geom_get_coords(name)
+   - geom_set_coords(name,coords)
+     Get/set cartesian coordinates for named geometry
+
+   - bond_length(i,j)
+     Compute bond length between atoms i & j for
+     default geometry
+
+   - (xmin, fmin) = minimize1d(f, xlo, xhi, xtol, maxeval)
+     Fairly robust minimization in 1d ... useful for crude
+     localization of saddle points (look in util.py for
+     better optimizers, notably quasinr()).
+
+   - results = scan_input(input,start,end,nstep,theory,task)
+     Scan parameters from start to end, substituting into 
+     the NWChem input string and calling the specified
+     task(theory), returning results from each step in results.
+
+util.py - lots of useful python routines for manipulating vectors,
+     matrices, and minimizing functions. Look in the file for more
+     documentation, and at the end of the file for example usage.
+
+basopt.nw - example of optimizing the exponents in a primitive basis
+     set using the quasi-Newton optimizer quasinr() in util.py
+
+basopt2.nw - another example of optimizing basis set exponents. 
+     Uncontracts an STO-3G basis for water and optimizes the exponents.
+     (this one will take a few minutes to complete)
+
+basopt3.nw - yet another example. This time using MP2 for HF to 
+     optimize the uncontracted sp on H and spd on F in the
+     cc-pVDZ basis.
+
+basopt4.nw - and another example.  This optimizes a sequence of
+     even tempered primitive basis sets for Be with between 2 and
+     twenty s functions and then prints out the summary to demonstrate
+     exponential convergence to the Hartree-Fock basis set limit.
+
+ts_search.nw
+     Example use of minimize1d from nwgeom.py
+
+scanexp.nw
+     Example use of scan_input from nwgeom.py
+
+hcn.nw
+     Scans the HCN -> CNH reaction path displaying bond lengths
+     and the energy as function of angle using Gnuplot.  You
+     need Python and the GNUplot and Numeric extensions
+     (www.python.org)
+
+nh3.nw
+     Scans the NH3 inversion path displaying bond lengths
+     and the energy as function of angle using Gnuplot.  You
+     need Python and the GNUplot and Numeric extensions
+     (www.python.org)
+     
+isdoesmic.nw
+     Uses python to compute a reaction energy as a function
+     of basis set.
+
+
+pes_scan.py
+   Python script for use in
+   NWchem that is the multidimensional analog of your zcoord scanning
+   script. This script can scan a grid of variables in several
+   dimensions, covering a parameter "volume", rather than the linear
+   track between points done by zcoord.
+   Additional documentation and usage notes is in the comments of the
+   script itself  (from Lev Gelb, gelb@mitre.wustl.edu) 
+   
+
+  

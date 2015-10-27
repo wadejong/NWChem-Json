@@ -1,0 +1,85 @@
+#!/bin/csh 
+# this script does and cvs update check and puts the output 
+# into update.ls
+#
+# rak pnl/94
+#
+# $Id: update_look 19708 2010-10-29 18:04:21Z d3y133 $
+#
+#
+if (! $?CVSROOT) then
+  echo " CVSROOT not set "
+  exit 1
+endif
+@ xmess = 0
+@ aflag = 0
+if ($#argv != 0) then
+   foreach arg ($argv)	
+      if ($arg == "x") then
+	@ xmess++
+      else if ($arg == "a") then
+	@ aflag++
+      else
+         echo "only x and a are valid arguments"
+         echo "argument passed: $arg"
+         exit 911
+      endif
+   end
+endif
+# determine if a release tree and get tag
+if (-e ./CVS/Tag) then
+   set reltag = `cat ./CVS/Tag | sed -e 's/^T//' `
+   @ inrelease = 1
+else
+   set reltag = " "
+   @ inrelease = 0
+endif
+#echo "reltag <${reltag}>"
+#
+echo " removing old update.ls info "
+find . -name update.ls -print -exec rm -f "{}" ";"
+find . -name .tmp.update.ls -exec rm -f "{}" ";"
+echo " making update.ls "
+if ($aflag) then
+  if ($inrelease) echo "*************** doing an update that ignores tags in a release (${reltag}) directory? STRANGE"
+  cvs -n update -A -d >& .tmp.update.ls 
+else
+  if ($inrelease) then
+    echo "cvs -n update -d -r ${reltag}"
+    cvs -n update -d -r ${reltag} >& .tmp.update.ls 
+  else
+    echo "cvs -n update -d "
+    cvs -n update -d  >& .tmp.update.ls 
+  endif
+endif
+grep 'M ' .tmp.update.ls > update.ls
+grep 'C ' .tmp.update.ls >> update.ls
+grep 'U ' .tmp.update.ls >> update.ls
+grep 'A ' .tmp.update.ls >> update.ls
+grep 'R ' .tmp.update.ls >> update.ls
+grep "? " .tmp.update.ls | egrep "\.fh|\.f|\.F|\.c|\.h|\.th|\.java" >> update.ls
+grep "ignored" .tmp.update.ls | grep -v plane_wave | grep -v nwmd >> update.ls
+grep "pertinent" .tmp.update.ls | grep longer >> update.ls
+# remove .fh files in include directory (done with a .cvsignore file in the include directory?)
+#mv update.ls .tmp.update.ls
+#cat .tmp.update.ls | grep -v "include/" > update.ls
+# sort makefile info to top of file
+mv update.ls .tmp.update.ls
+date > update.ls
+echo " **** makefile specific changes ****" >> update.ls
+cat .tmp.update.ls | grep -i makefile >> update.ls
+echo " " >> update.ls
+echo " **** source specific changes ****" >> update.ls
+cat .tmp.update.ls | grep -iv makefile >> update.ls
+/bin/rm -f .tmp.update.ls
+if (`hostname` == "cagle") then
+   bell;clear;bell
+   cat update.ls
+   bell
+else
+   clear; cat update.ls
+endif
+if ($xmess) then
+   xmessage " update_look $argv is done in $cwd on `hostname` at `date`"
+endif
+exit 0

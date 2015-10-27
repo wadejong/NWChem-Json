@@ -1,0 +1,10 @@
+Energy           =   -4.622E+05
+Energy           =   -4.728E+05
+Energy           =   -4.820E+05
+Energy           =   -4.904E+05
+Energy           =   -4.981E+05
+Energy           =   -5.050E+05
+Energy           =   -5.112E+05
+Energy           =   -5.168E+05
+Energy           =   -5.217E+05
+Energy           =   -5.259E+05

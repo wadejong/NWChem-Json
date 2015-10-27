@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+runtests.unix procs 1 \
+ $NWCHEM_TEST/esp/esp
+runtests.unix procs 1 \
+ $NWCHEM_TEST/esp_uhf/esp_uhf

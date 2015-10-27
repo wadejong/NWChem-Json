@@ -1,0 +1,33 @@
+*
+* $Id: electron_common.fh 25768 2014-06-10 00:33:15Z bylaska $
+*
+
+*     ***** electron common block *************************************
+      logical field_exist
+      integer ispin,ne(2),neq(2),nfft3d,npack1,npack0
+      integer Hpsi_k(2)
+      integer psi_r(2)
+      integer vl(2)         ! short-range local psp
+      integer vlpaw_aux(2)  ! short-range local paw psps
+      integer vl_lr(2)      ! long-range local psp
+      integer v_field(2)    ! used for qm/mm and charge fields
+      integer vc(2)         ! coulomb potential
+      integer xcp(2)        ! xc potential
+      integer xce(2)        ! xc energy density
+      integer vall(2)
+      integer vh(2)
+      real*8  ehsic,exsic,phsic,pxsic ! SIC energies
+      real*8  ehfx,phfx               ! HFX energies
+      real*8  edftu,pdftu             ! DFT+U energies
+      real*8  emeta,pmeta             ! Metadynamics potential energies
+
+      common / electron_block / ehsic,exsic,phsic,pxsic,ehfx,phfx,
+     >                          edftu,pdftu,emeta,pmeta,
+     >                          Hpsi_k,psi_r,
+     >                          vl,vlpaw_aux,
+     >                          vl_lr,v_field,
+     >                          vc,xcp,xce,vall,vh,
+     >                          ne,neq,ispin,nfft3d,npack1,npack0,
+     >                          field_exist
+*     *****************************************************************
+

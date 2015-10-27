@@ -1,0 +1,22 @@
+      interface
+#if !defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+#if defined(NWAD_PRINT)
+        Subroutine nwxc_GZeta_p(Zeta,GZet,dGZdz,d2GZdz,d3GZdz)
+          use nwadp1
+#else
+        Subroutine nwxc_GZeta(Zeta,GZet,dGZdz,d2GZdz,d3GZdz)
+          use nwad1
+#endif
+#elif defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+        Subroutine nwxc_GZeta_d2(Zeta,GZet,dGZdz,d2GZdz,d3GZdz)
+          use nwad2
+#else
+        Subroutine nwxc_GZeta_d3(Zeta,GZet,dGZdz,d2GZdz,d3GZdz)
+          use nwad3
+#endif
+          implicit none
+          type(nwad_dble)::Zeta,GZet
+          double precision dGZdz,d2GZdz,d3GZdz
+        end subroutine
+      end interface
+c $Id: intf_nwxc_GZeta.fh 26391 2014-11-16 07:19:39Z d3y133 $

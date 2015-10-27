@@ -1,0 +1,33 @@
+echo
+start n2
+
+geometry
+  n  0 0   0.53879155
+  n  0 0  -0.53879155
+symmetry c1
+end
+
+basis  
+n library cc-pvdz
+end
+
+tce
+ccsd
+densmat n2.densmat
+end
+
+task tce energy
+
+dplot
+  TITLE DENSITY
+   LimitXYZ
+ -3.0 3.0 10  
+ -3.0 3.0 10 
+ -3.0 3.0 10
+  spin total
+  gaussian
+  output  dens_ccsd.cube
+  densmat n2.densmat
+end
+
+task dplot

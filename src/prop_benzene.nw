@@ -1,0 +1,51 @@
+echo
+start prop_benzene_run
+title benzene
+
+geometry
+  C        0.00000        1.40272        0.00000
+  H        0.00000        2.49029        0.00000
+  C       -1.21479        0.70136        0.00000
+  H       -2.15666        1.24515        0.00000
+  C       -1.21479       -0.70136        0.00000
+  H       -2.15666       -1.24515        0.00000
+  C        0.00000       -1.40272        0.00000
+  H        0.00000       -2.49029        0.00000
+  C        1.21479       -0.70136        0.00000
+  H        2.15666       -1.24515        0.00000
+  C        1.21479        0.70136        0.00000
+  H        2.15666        1.24515        0.00000
+end
+
+basis
+ * library cc-pvdz
+# * library aug-cc-pvtz
+end
+charge 0
+
+task scf energy
+task scf optimize
+task scf freq
+
+property
+ mulliken
+ dipole
+ quadrupole
+ octupole
+ esp
+ efield
+ efieldgrad
+ electrondensity
+ shielding
+end
+
+task scf property
+
+dft
+ xc b3lyp
+end
+
+task dft energy
+task dft optimize
+task dft freq
+task dft property

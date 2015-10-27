@@ -1,0 +1,44 @@
+echo
+start prop_h2o_run
+title h2o
+
+geometry units bohr
+o  0.0  0.0 0.11786656
+h  0.0 1.84118838 -0.93531364
+h  0.0 -1.84118838 -0.93531364
+end
+
+basis
+ * library cc-pvdz
+# * library aug-cc-pvtz
+end
+charge 0
+
+task scf energy
+task scf optimize
+task scf freq
+
+property
+ mulliken
+ dipole
+ quadrupole
+ octupole
+ esp
+ efield
+ efieldgrad
+ electrondensity
+ shielding
+end
+
+task scf property
+
+geometry units bohr
+o  1.0  0.0 0.11786656
+h  1.0 1.84118838 -0.93531364
+h  1.0 -1.84118838 -0.93531364
+end
+
+task dft energy
+task dft optimize
+task dft freq
+task dft property

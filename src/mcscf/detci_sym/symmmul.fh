@@ -1,0 +1,8 @@
+*
+* $Id: symmmul.fh 24346 2013-06-23 04:25:38Z d3y133 $
+*
+c
+c  Irrep direct product using EOR
+c
+      MULX(imul,jmul) = ieor((imul-1),(jmul-1)) + 1
+

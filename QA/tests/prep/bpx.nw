@@ -1,0 +1,10 @@
+echo
+start something
+
+prepare
+ system bpx_em
+ new_top new_seq
+ chain *
+end
+
+task prepare

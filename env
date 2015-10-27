@@ -1,0 +1,7 @@
+export NWCHEM_TOP=$PWD
+export NWCHEM_TARGET=LINUX64
+export NWCHEM_MODULES='all lucia'
+export USE_MPI=y
+export USE_MPIF=y
+export USE_MPIF4=y
+export BLASOPT='-llapack -lblas'

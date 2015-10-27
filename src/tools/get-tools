@@ -1,0 +1,122 @@
+#!/bin/bash
+#
+# $Id: get-tools 27094 2015-05-07 23:13:50Z edo $
+#
+
+unalias -a
+
+export NWCHEM_TOP=${NWCHEM_TOP:-"`pwd`/../"}
+if test "x$NWCHEM_TOP" = x
+then
+    echo You must set NWCHEM_TOP to use this script.
+    exit 1
+fi
+
+ga_version=0
+while [ $# -gt 0 ]
+do
+   case "$1" in
+      --ga-version) ga_version=1;;
+      *)
+         echo >&2 "usage: $0 [--ga-version]"
+         exit 1;;
+   esac
+   shift 
+done
+
+TOOLDIR=`pwd`
+TOOLSVN=`which svn`
+CONFIG=$NWCHEM_TOP/src/config/makefile.h
+   GA_DEV_SVN=https://svn.pnl.gov/svn/hpctools/trunk/ga
+       GA_DEV=ga-dev
+
+if test "x$GA_STABLE" = x
+then
+    GA_STABLE=ga-5-4
+GA_STABLE_SVN=https://svn.pnl.gov/svn/hpctools/branches/ga-5-4
+else
+     GA_STABLE_SVN=https://svn.pnl.gov/svn/hpctools/branches/$GA_STABLE
+fi
+
+   GA_EXP_SVN=https://svn.pnl.gov/svn/hpctools/branches/exp1
+       GA_EXP=ga-exp1
+
+# If EXP_GA is set at all in the user's environment then it means 'yes'
+if test "x$EXP_GA" != x
+then
+    EXP_GA=yes
+fi
+if [ $ga_version == 0 ] ; then
+  echo "EXP_GA=$EXP_GA"
+  echo "GA_STABLE=$GA_STABLE"
+fi
+
+# If DEV_GA is set at all in the user's environment then it means 'yes'
+#    DEV_GA=y
+if test "x$DEV_GA" != x
+then
+    GA_SVN=$GA_DEV_SVN
+    GA_DIRNAME=$GA_DEV
+elif test "x$EXP_GA" != x
+then
+    GA_SVN=$GA_EXP_SVN
+    GA_DIRNAME=$GA_EXP
+else
+    GA_SVN=$GA_STABLE_SVN
+    GA_DIRNAME=$GA_STABLE
+fi
+
+if [ $ga_version == 1 ] ; then
+  echo $GA_DIRNAME
+  exit 0
+fi
+
+if [ ${#TOOLSVN} -eq 0 ] ; then
+  echo "No Subversion found!"
+  echo "Giving up and hoping for the best..."
+  exit 0
+fi
+svn log ./get-tools 2>&1 > /dev/null
+stat=$?
+if [ $stat -ne 0 ] ; then
+  echo "No access to repository!"
+  echo "Giving up and hoping for the best..."
+  exit 0
+fi
+
+
+# Update the autotools build of GA.
+#if test -e $TOOLDIR/build
+#then
+#    echo "You have an old copy of the ga tools using configure"
+#    echo "Deleting it now"
+#    rm -rf $TOOLDIR/build
+#    rm -rf $TOOLDIR/install
+#fi
+if test -d $GA_DIRNAME
+then
+    echo "Updating existing $GA_DIRNAME"
+    cd $GA_DIRNAME
+    svn cleanup
+    if svn update --username nwchem --password nwchem
+    then
+        echo "Finished updating existing $GA_DIRNAME"
+    else
+        echo "Failed updating existing $GA_DIRNAME"
+        echo "Attempting to remove $GA_DIRNAME"
+        cd $TOOLDIR
+        if rm -rf $GA_DIRNAME
+        then
+            echo "Checking out $GA_SVN"
+            svn checkout $GA_SVN $GA_DIRNAME --username nwchem --password nwchem
+        else
+            echo "Failed to remove $GA_DIRNAME"
+            echo "get-tools has failed"
+        fi
+    fi
+    cd $TOOLDIR
+else
+    echo "Checking out $GA_SVN"
+    svn checkout $GA_SVN $GA_DIRNAME --username nwchem --password nwchem
+fi
+exit 0

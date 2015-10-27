@@ -1,0 +1,27 @@
+#!/bin/csh 
+# 
+# $Id: Fixinclude 19708 2010-10-29 18:04:21Z d3y133 $
+#
+# ! RJH ... This utility should no longer be necessary (10/95)
+#
+# This utility should safley find all files with 
+# a particular include file and set things up for 
+# a normal make pass.  It is very conservative.  
+#
+# RA Kendall PNL 4/95
+#
+# flaws: 
+#    1) trashes all includes 
+#    2) recompiles global
+#    3) recompiles part tcgmsg
+#
+foreach include_file ($argv)
+  echo " searching for files with ........................... $include_file"
+  set list = `find . -name "*.F" -exec grep -l $include_file "{}" ";" `
+  foreach file ($list)
+	echo "touch $file "
+	touch $file
+  end
+end
+find . -name "*stamp" -exec rm "{}" ";"
+

@@ -1,0 +1,143 @@
+#!/bin/csh -f
+#
+# $Id: doqmtests 27306 2015-07-29 00:05:53Z edo $
+#
+#---   small tests
+set np = 1
+if ($1 !="") then
+set np = $1
+endif
+./runtests.unix procs $np auh2o autosym dft_he2+ h2mp2 h2o hess_h2o prop_h2o pyqa
+./runtests.unix procs $np geom_zmatrix rimp2_ne  scf_feco5 small_intchk tagcheck testtab
+./runtests.unix procs $np h2o_dk u_sodft cosmo_h2o ch5n_nbo h2s_finite startag
+./runtests.unix procs $np cosmo_trichloroethene esp esp_uhf dft_bsse dft_s12gh c4h4_wfn
+./runtests.unix procs $np dplot dft_meta dft_mpwb1khf dft_m05nh2ch3 prop_uhf_h2o
+./runtests.unix procs $np et_zn_dimer vectors_rotate sad_ch3hf
+
+#---   small tests that should fail!
+echo ' '
+echo 'The oh2 test is testing the perl parsing script and SHOULD fail'
+./runtests.unix procs $np oh2
+#---   medium tests
+./runtests.unix procs $np dft_feco5 
+./runtests.unix procs $np dft_siosi3
+./runtests.unix procs $np dft_cr2
+./runtests.unix procs $np dft_x
+./runtests.unix procs $np dft_mpw1k dft_li2freq
+echo 'The intermediate values for this test may cause some differences.'
+echo 'Please check the final values for the last optimized structure.'
+./runtests.unix procs $np dielsalder
+echo 'The intermediate energy values for the numerical gradient '
+echo 'test may cause some differences.'
+echo 'Please check the final gradient values for correctness.'
+./runtests.unix procs $np grad_ozone
+./runtests.unix procs $np dft_ozone 
+./runtests.unix procs $np hess_c6h6
+./runtests.unix procs $np intchk
+echo 'The intermediate values for this test may cause some differences.'
+echo 'Please check the final values for the last optimized structure.'
+./runtests.unix procs $np sadsmall
+#./runtests.unix procs $np sadbig
+./runtests.unix procs $np h2o_ccca
+./runtests.unix procs $np br2_dk
+./runtests.unix procs $np uo2_sodft
+./runtests.unix procs $np uo2_sodft_grad
+./runtests.unix procs $np si2cl6_gc
+./runtests.unix procs $np pspw
+./runtests.unix procs $np pspw_SiC
+./runtests.unix procs $np pspw_md
+./runtests.unix procs $np paw
+./runtests.unix procs $np pspw_polarizability
+./runtests.unix procs $np pspw_stress
+./runtests.unix procs $np band
+./runtests.unix procs $np tddft_h2o
+./runtests.unix procs $np tddft_n2+
+./runtests.unix procs $np tddft_ac_co
+./runtests.unix procs $np dft_semidirect
+./runtests.unix procs $np tce_h2o
+./runtests.unix procs $np tce_h2o_dipole
+./runtests.unix procs $np tce_h2o_eomcc
+./runtests.unix procs $np tce_uhf_uccsd
+./runtests.unix procs $np tce_rohf_uccsd
+./runtests.unix procs $np tce_cr_eom_t_ch_rohf
+./runtests.unix procs $np tce_cr_eom_t_ozone
+./runtests.unix procs $np tce_active_ccsdt
+./runtests.unix procs $np tce_lr_ccsd_t
+./runtests.unix procs $np tce_lr_ccsd_tq
+./runtests.unix procs $np tce_ozone_2eorb
+./runtests.unix procs $np tce_polar_ccsd_small
+./runtests.unix procs $np tce_hyperpolar_ccsd_small
+./runtests.unix procs $np tce_eomsd_eomsol1
+./runtests.unix procs $np tce_eomsd_eomsol2
+./runtests.unix procs $np tce_uracil_creomact
+./runtests.unix procs $np oniom1
+./runtests.unix procs $np c60_ecp
+./runtests.unix procs $np h2o_vscf
+./runtests.unix procs $np hi_zora_sf
+./runtests.unix procs $np xe_zora_sf
+./runtests.unix procs $np i2_zora_so
+./runtests.unix procs $np o2_zora_so
+# qmmm tests
+#./runtests.unix procs $np asa_qmmm
+./runtests.unix procs $np qmmm_grad0
+./runtests.unix procs $np lys_qmmm
+./runtests.unix procs $np ethane_qmmm
+./runtests.unix procs $np qmmm_opt0
+echo "qmmm frequency  test  may  fail"
+./runtests.unix procs $np qmmm_freq
+
+# newproperty tests
+./runtests.unix procs $np prop_ch3f prop_uhf_ch3f
+#---   long  may not run on workstations
+./runtests.unix procs $np aump2 
+./runtests.unix procs $np n2_ccsd 
+./runtests.unix procs $np uoverlap
+./runtests.unix procs $np grad_nh3_trimer 
+./runtests.unix procs $np hess_nh3
+./runtests.unix procs $np hess_nh3_dimer
+./runtests.unix procs $np mp2_si2h6
+./runtests.unix procs $np pbo_nesc1e
+./runtests.unix procs $np bf_cis
+./runtests.unix procs $np oniom3
+./runtests.unix procs $np cytosine_ccsd
+./runtests.unix procs $np h2o_selci
+
+#
+#--- NEB test cases
+./runtests.unix procs $np neb-fch3cl neb-isobutene
+
+#
+#--- range-separated functionals tests
+./runtests.mpi.unix procs $1 acr-camb3lyp-cdfit
+./runtests.mpi.unix procs $1 acr-camb3lyp-direct
+./runtests.mpi.unix procs $1 acr_lcblyp
+./runtests.mpi.unix procs $1 h2_bnl
+./runtests.mpi.unix procs $1 h2o_bnl
+./runtests.mpi.unix procs $1 h2o-camb3lyp-pol-cdfit
+./runtests.mpi.unix procs $1 h2o-camb3lyp-pol
+./runtests.mpi.unix procs $1 h2o-cambeckehh
+./runtests.mpi.unix procs $1 h2o-campbe0
+./runtests.mpi.unix procs $1 h2o-lcpbe
+./runtests.mpi.unix procs $1 o2_bnl
+./runtests.mpi.unix procs $1 o2_hfattn
+./runtests.mpi.unix procs $1 cdft_jarv1
+#
+#--- dft + dispersion tests
+./runtests.mpi.unix procs $1 disp_dimer_ch4
+#
+#--- double hybrid tests
+./runtests.mpi.unix procs $1 Ne_scf-mp2_cc-vqz
+./runtests.mpi.unix procs $1 Ne_b2plyp_cc-vqz
+./runtests.mpi.unix procs $1 He_scf-mp2_cc-vqz
+./runtests.mpi.unix procs $1 He_b2plyp_cc-vqz
+./runtests.mpi.unix procs $1 Ar_scf-mp2_cc-vqz
+./runtests.mpi.unix procs $1 Ar_b2plyp_cc-vqz
+#
+#--- cdspectrum tests
+./runtests.mpi.unix procs $1 dmo_tddft_cd
+#
+#--- spherical atom symmetry test
+./runtests.mpi.unix procs $1 ptatom
+
+
+

@@ -1,0 +1,53 @@
+      interface
+#if !defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+#if defined(NWAD_PRINT)
+        Subroutine nwxc_x_pw91core_p(DPOW,BETA,n,ispin,
+     &                             rho,gamma,func,
+     &                             tol_rho, wght,
+     &                             nq, ipol)
+          use nwadp1
+#else
+        Subroutine nwxc_x_pw91core(DPOW,BETA,n,ispin,
+     &                             rho,gamma,func,
+     &                             tol_rho, wght,
+     &                             nq, ipol)
+          use nwad1
+#endif
+#elif defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+        Subroutine nwxc_x_pw91core_d2(DPOW,BETA,n,ispin,
+     &                             rho,gamma,func,
+     &                             tol_rho, wght,
+     &                             nq, ipol)
+          use nwad2
+#else
+        Subroutine nwxc_x_pw91core_d3(DPOW,BETA,n,ispin,
+     &                             rho,gamma,func,
+     &                             tol_rho, wght,
+     &                             nq, ipol)
+          use nwad3
+#endif
+          implicit none
+#if defined(NWAD_PRINT)
+#if !defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+          type(nwad_dble)::dpow
+          type(nwad_dble)::beta
+#else
+          double precision dpow
+          double precision beta
+#endif
+#else
+          double precision dpow
+          double precision beta
+#endif
+          integer n
+          integer ispin
+          type(nwad_dble)::rho
+          type(nwad_dble)::gamma
+          type(nwad_dble)::func
+          double precision tol_rho
+          double precision wght
+          integer nq
+          integer ipol
+        end subroutine
+      end interface
+c $Id: intf_nwxc_x_pw91core.fh 26391 2014-11-16 07:19:39Z d3y133 $

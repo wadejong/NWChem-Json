@@ -1,0 +1,12 @@
+#if !defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+#if defined(NWAD_PRINT)
+      use nwadp1
+#else
+      use nwad1
+#endif
+#elif defined(SECOND_DERIV) && !defined(THIRD_DERIV)
+      use nwad2
+#else
+      use nwad3
+#endif
+c $Id: nwad.fh 26393 2014-11-16 09:22:44Z d3y133 $

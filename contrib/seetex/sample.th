@@ -1,0 +1,6 @@
+*:tex-begin
+*:tex-cvsid
+*:tex-\section{george}
+*:tex-\subsection{bob}
+*:tex-\nopar
+*:tex-end

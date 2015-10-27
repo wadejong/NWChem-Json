@@ -1,0 +1,19 @@
+HEADER
+TITLE     
+TITLE    2
+TITLE    3
+REMARK   4 XXXX COMPLIES WITH FORMAT V. 2.1, 25-OCT-1996
+CRYST1   16.250   16.250   16.250  90.00  90.00  90.00
+ATOM      1  C1  bnz     1      -1.069  -0.822  -0.105        0.00     C
+ATOM      2  H1  bnz     1      -1.902  -1.499  -0.221        0.00     H
+ATOM      3  C2  bnz     1      -0.862  -0.130   1.103        0.00     C
+ATOM      4  H2  bnz     1      -1.557  -0.286   1.915        0.00     H
+ATOM      5  C3  bnz     1       0.216   0.741   1.243        0.00     C
+ATOM      6  H3  bnz     1       0.390   1.281   2.163        0.00     H
+ATOM      7  C4  bnz     1       1.120   0.936   0.170        0.00     C
+ATOM      8  H4  bnz     1       1.956   1.609   0.290        0.00     H
+ATOM      9  C5  bnz     1       0.924   0.230  -1.031        0.00     C
+ATOM     10  H5  bnz     1       1.632   0.370  -1.834        0.00     H
+ATOM     11  C6  bnz     1      -0.160  -0.635  -1.175        0.00     C
+ATOM     12  H6  bnz     1      -0.325  -1.187  -2.088        0.00     H
+END
