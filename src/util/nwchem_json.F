@@ -962,19 +962,19 @@
 
       call json_create_array(molMods, 'normalModes')
       call json_add(calcResult,molMods)
-      istart = 7
-      if (linear) istart = 6
       do i = istart, icount
-         call json_create_object(molMod, '')
-         call json_add(molModS,molMod)
-         write(idnum,"(i4)") i-istart+1
-         call json_add(molMod,'id','normalMode.'//trim(adjustl(idnum)))
-         call json_add_set(molMod,'normalModeFrequency', eigval(i),
-     &                     'cm-1')
-         call json_add_set(molMod,'normalModeInfraRedIntensity',
-     &                     intens(i,2), '(debye/angs)**2')
-         call json_add_set(molMod,'normalModeVector',
-     &                     eigVec(1:icount,i), 'none')
+         if (dabs(eigval(i)).gt.1.0d0) then
+          call json_create_object(molMod, '')
+          call json_add(molModS,molMod)
+          write(idnum,"(i4)") i-istart+1
+          call json_add(molMod,'id','normalMode.'//trim(adjustl(idnum)))
+          call json_add_set(molMod,'normalModeFrequency', eigval(i),
+     &                      'cm-1')
+          call json_add_set(molMod,'normalModeInfraRedIntensity',
+     &                      intens(i,2), '(debye/angs)**2')
+          call json_add_set(molMod,'normalModeVector',
+     &                      eigVec(1:icount,i), 'none')
+         endif
       enddo
 
       end subroutine
