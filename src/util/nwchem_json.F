@@ -628,7 +628,7 @@
 ! Hill notation
 
       do i = 1, uniqueAtoms
-        if (formulaCount.gt.1) then
+        if (formulaCount(i).gt.1) then
         write(istr,"(i4)") formulaCount(i)
         mystring = mystring//trim(formulaNames(i))//trim(adjustl(istr))
         else
