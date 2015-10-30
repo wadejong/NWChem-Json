@@ -962,7 +962,7 @@
 
       call json_create_array(molMods, 'normalModes')
       call json_add(calcResult,molMods)
-      do i = istart, icount
+      do i = 1, icount
          if (dabs(eigval(i)).gt.1.0d0) then
           call json_create_object(molMod, '')
           call json_add(molModS,molMod)
