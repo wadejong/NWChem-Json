@@ -472,10 +472,10 @@
       character(len=8) :: systemType, grpName
   
       integer, parameter :: maxireps=20
-      integer :: nop, nir, nat, i, j, ij
+      integer :: nop, nir, nat, i, j, ij, ij2
       integer :: class_dim(maxireps)
       character(len=8) :: zir(maxireps), zclass(maxireps)
-      character(len=8) :: imnum, ianum
+      character(len=8) :: imnum, ianum, istr
       character(len=32) :: atomID
       character(len=10) :: units
       real(kind=8) :: chars(maxireps,maxireps)
@@ -485,7 +485,15 @@
       type(json_value), pointer :: moleculeObj, atomsObj, atomObj
       type(json_value), pointer :: molSym, coordsJS, atPosObj
       type(json_value), pointer :: pointTo
-      logical :: found
+      logical :: found, notInList
+ 
+      character(len=2), allocatable :: formulaNames(:)
+      character(len=:), allocatable :: mystring
+      integer, allocatable :: formulaCount(:)
+
+      integer :: tempCount
+      character(len=2) :: tempNames
+      integer :: uniqueAtoms
   
       if (ga_nodeid().gt.0) return
  
@@ -527,6 +535,9 @@
       call json_create_array(atomsObj, 'atoms')
       call json_add(moleculeObj, atomsObj)
       nat = ncenter(geom)
+      allocate(formulaNames(nat))
+      allocate(formulaCount(nat))
+      uniqueAtoms = 0
       do i=1,nat
          call json_create_object(atomObj, '')
          call json_add(atomsObj, atomObj)
@@ -538,6 +549,24 @@
          call json_add(atomObj, 'id', trim(atomID))
          call json_add(atomObj, 'elementLabel', trim(tags(i,geom)))
          call json_add(atomObj, 'elementSymbol', elsym)
+         if (i==1) then
+           formulaNames(1) = elsym
+           formulaCount(1) = 1
+           uniqueAtoms = 1
+         else
+           notInList = .true.
+           do j = 1, uniqueAtoms
+             if (formulaNames(j) == elsym) then
+               formulaCount(j) = formulaCount(j)+1
+               notInList = .false.
+             endif
+           enddo
+           if (notInList) then
+             uniqueAtoms = uniqueAtoms + 1
+             formulaNames(uniqueAtoms) = elsym
+             formulaCount(uniqueAtoms) = 1 
+           endif
+         endif
          call json_add(atomObj, 'elementNumber', atn)
          call json_add(atomObj, 'elementName', elem)
          call json_create_object(atPosObj, 'cartesianCoordinates')
@@ -549,6 +578,66 @@
          enddo
          call json_add(atPosObj, 'units', trim(units) )
       enddo
+      mystring = ''
+      ij = 1
+      ij2 = 1
+
+! Need C first if in list
+
+      do i = 1, uniqueAtoms
+        if (formulaNames(i) == 'C ') then
+          tempNames = formulaNames(1)
+          tempCount = formulaCount(1)
+          formulaNames(1) = formulaNames(i)
+          formulaCount(1) = formulaCount(i)
+          formulaNames(i) = tempNames
+          formulaCount(i) = tempCount
+          ij = 2
+        endif
+      enddo
+
+! Need H second if in list or first if no C
+
+      do i = ij, uniqueAtoms
+        if (formulaNames(i) == 'H ') then
+          tempNames = formulaNames(ij)
+          tempCount = formulaCount(ij)
+          formulaNames(ij) = formulaNames(i)
+          formulaCount(ij) = formulaCount(i)
+          formulaNames(i) = tempNames
+          formulaCount(i) = tempCount
+          ij2 = ij + 1
+        endif
+      enddo
+
+! Need to do a sort alphabetically after C and H
+
+      do i = uniqueAtoms-1, ij2, -1
+        do j = ij2, i
+          if (formulaNames(j) > formulaNames(j+1)) then
+            tempNames = formulaNames(j)
+            tempCount = formulaCount(j)
+            formulaNames(j) = formulaNames(j+1)
+            formulaCount(j) = formulaCount(j+1)
+            formulaNames(j+1) = tempNames
+            formulaCount(j+1) = tempCount
+          endif
+        enddo 
+      enddo
+
+! Hill notation
+
+      do i = 1, uniqueAtoms
+        if (formulaCount.gt.1) then
+        write(istr,"(i4)") formulaCount(i)
+        mystring = mystring//trim(formulaNames(i))//trim(adjustl(istr))
+        else
+        mystring = mystring//trim(formulaNames(i))
+        endif
+      enddo
+      call json_add(calcTask, 'molecularFormula', mystring)
+      deallocate(formulaCount)
+      deallocate(formulaNames)
    
 ! If periodic, add lattice vectors
 
