@@ -926,6 +926,7 @@
             call json_add_set(oneOrb, 'orbitalEnergy', eval(j,i),
      &                        'Hartree')
             ksym = zir(sym(j,i))
+            call json_add(oneOrb, 'orbitalNumber', j)
             call json_add(oneOrb, 'orbitalSymmetry', trim(ksym))
             call json_add(oneOrb, 'orbitalOccupancy', occ(j,i))
             call json_add(oneOrb, 'moCoefficients', k_v(1:nbf,j,i))
