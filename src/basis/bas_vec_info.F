@@ -204,7 +204,11 @@ c
                   cbf = cartbf(type,ibf)
                else
                   cbf = ' '
-                  write(cbf,'(i3)') ibf-shdim/2-1
+                  if (ibf-shdim/2-1 .lt. 0) then
+                     write(cbf,'(i2)') ibf-shdim/2-1
+                  else
+                     write(cbf,'(i1)') ibf-shdim/2-1
+                  endif
                endif
 c
                i = i + 1
