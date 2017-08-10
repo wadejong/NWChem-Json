@@ -14,7 +14,6 @@ basis
 end
 charge 0
 
-task scf energy
 task scf optimize
 task scf freq
 
@@ -38,7 +37,6 @@ h  1.0 1.84118838 -0.93531364
 h  1.0 -1.84118838 -0.93531364
 end
 
-task dft energy
 task dft optimize
 task dft freq
 task dft property
