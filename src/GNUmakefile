@@ -113,7 +113,7 @@ showdir:
 
 clean:	
 	@$(MAKE) directories
-	-$(RM) core *.o *.a *.trace
+	-$(RM) core *.o *.a *.mod *.trace
 	@for dir in $(SUBDIRS) config ; do \
 		echo Making $@ in $$dir; \
 		$(MAKE)	-C $$dir clean || exit 1 ;  \
@@ -121,7 +121,7 @@ clean:
 
 realclean:	
 	@$(MAKE) directories
-	-$(RM) nwchem nwchem_prof nwchem_test core *.o *.a *.trace makefile.bak
+	-$(RM) nwchem nwchem_prof nwchem_test core *.o *.a *.mod *.trace makefile.bak
 	-$(RM) *~ \#*\#
 	@for dir in $(SUBDIRS) config ; do \
 		echo Making $@ in $$dir; \
