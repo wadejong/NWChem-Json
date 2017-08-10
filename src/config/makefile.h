@@ -132,8 +132,8 @@ endif
 # their header files are needed for dependency analysis of
 # other NWChem modules
 
-NW_CORE_SUBDIRS = tools include basis geom inp input  \
-	pstat rtdb task symmetry util peigs perfm bq cons $(CORE_SUBDIRS_EXTRA)
+NW_CORE_SUBDIRS = tools include util basis geom inp input  \
+	pstat rtdb task symmetry peigs perfm bq cons $(CORE_SUBDIRS_EXTRA)
 
 # Include the modules to build defined by 'make nwchem_config' at top level
 
@@ -2478,6 +2478,12 @@ endif
 
 (%.o):	%.F90
 	$(FC) -c $(FFLAGS) $<
+
+(%.o):	%.FF90
+	cp $*.FF90 $*.F
+	$(FC) -c $(FFLAGS) $(CPPFLAGS) $*.F
+	rm $*.F
+	@cp $*.mod $(INCDIR)/.
 
 (%.o):	%.f
 	$(FC) -c $(FFLAGS) $<

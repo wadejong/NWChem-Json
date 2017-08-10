@@ -14,3 +14,5 @@ clean:
 realclean:
 	if exist "*.h" erase "*.h"
 	if exist "*.fh" erase "*.fh"
+	if exist "*.inc" erase "*.inc"
+	if exist "*.mod" erase "*.mod"

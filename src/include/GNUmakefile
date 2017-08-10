@@ -32,5 +32,5 @@ depend:
 source:
 	
 realclean:
-	$(RM) *.h *.fh
+	$(RM) *.h *.fh *.inc *.mod
 	$(RM) *~ \#*\#
