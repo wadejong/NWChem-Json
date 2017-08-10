@@ -1,1 +1,0 @@
-      COMMON/LORR/L_OR_R
