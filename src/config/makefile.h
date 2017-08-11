@@ -2482,7 +2482,7 @@ endif
 (%.o):	%.FF90
 	cp $*.FF90 $*.F
 	$(FC) -c $(FFLAGS) $(CPPFLAGS) $*.F
-	cp $*.mod $(INCDIR)/.
+	cp *.mod $(INCDIR)/.
 
 (%.o):	%.f
 	$(FC) -c $(FFLAGS) $<
