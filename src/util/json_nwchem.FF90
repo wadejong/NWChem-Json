@@ -808,7 +808,7 @@ c     endif
         call json_add(basAtom, 'elementLabel', trim(mytag))
         call json_add(basAtom, 'elementType', trim(symbol))
         call json_add(basAtom, 'basisSetType', trim(mytype))
-        call json_add(basAtom, 'basissetName', trim(myname))
+        call json_add(basAtom, 'basisSetName', trim(myname))
         call json_add(basAtom, 'basisSetHarmonicType', trim(myspcart))
         if (Has_ecp) then
           if (.not.ecp_get_num_elec(basisin,mytag,nelec)) 
